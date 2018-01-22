@@ -1,13 +1,7 @@
 <?php
 
-namespace Galantom\Sustain\Library\Form\Renderer;
-
-use Nip_Form_Element_Abstract;
-use Nip_Form_Renderer_Bootstrap;
-
 /**
  * Class Bootstrap4
- * @package Galantom\Sustain\Library\Form\Renderer
  */
 class Nip_Form_Renderer_Bootstrap4 extends Nip_Form_Renderer_Bootstrap
 {

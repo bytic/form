@@ -58,7 +58,14 @@ abstract class AbstractForm
 
     public function init()
     {
-        $this->setAction(current_url());
+        $this->initAction();
+    }
+
+    protected function initAction()
+    {
+        if (function_exists('current_url')) {
+            $this->setAction(current_url());
+        }
     }
 
     /**
