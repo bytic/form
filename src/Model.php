@@ -22,7 +22,12 @@ class Nip_Form_Model extends Nip_Form
         return $this->addError($this->getModelMessage($name));
     }
 
-    public function getModelMessage($name, $variables = array())
+    /**
+     * @param $name
+     * @param array $variables
+     * @return mixed
+     */
+    public function getModelMessage($name, $variables = [])
     {
         return $this->getModel()->getManager()->getMessage('form.' . $name, $variables);
     }
@@ -65,7 +70,7 @@ class Nip_Form_Model extends Nip_Form
      * @param array $variables
      * @return $this
      */
-    public function addInputModelError($input, $name, $variables = array())
+    public function addInputModelError($input, $name, $variables = [])
     {
         return $this->$input->addError($this->getModelMessage($name, $variables));
     }

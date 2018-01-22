@@ -10,6 +10,7 @@ use Nip\Form\AbstractForm;
  *
  * @method addInput($name, $label = false, $isRequired = false)
  * @method addHidden($name, $label = false, $isRequired = false)
+ * @method addPassword($name, $label = false, $isRequired = false)
  * @method addSelect($name, $label = false, $isRequired = false)
  * @method addDateinput($name, $label = false, $isRequired = false)
  * @method addRadioGroup($name, $label = false, $isRequired = false)
