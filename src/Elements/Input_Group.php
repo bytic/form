@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Class Nip_Form_Element_Input_Group
+ */
 abstract class Nip_Form_Element_Input_Group extends Nip_Form_Element_Abstract
 {
     protected $_type = 'input_group';
