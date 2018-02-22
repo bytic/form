@@ -769,7 +769,7 @@ abstract class AbstractForm
      */
     public function getMessageTemplate($name)
     {
-        return $this->_messageTemplates[$name];
+        return isset($this->_messageTemplates[$name]) ? $this->_messageTemplates[$name] : null;
     }
 
 
@@ -892,7 +892,7 @@ abstract class AbstractForm
     public function getControllerView()
     {
         if (!$this->controllerView) {
-            $this->controllerView = app('app')->getDispatcher()->getCurrentController()->getView();
+            $this->controllerView = app('kernel')->getDispatcher()->getCurrentController()->getView();
         }
 
         return $this->controllerView;

@@ -1,7 +1,5 @@
 <?php
 
-use function Nip\locale;
-
 class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
 {
     protected $_type = 'dateinput';
@@ -12,8 +10,9 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
     public function init()
     {
         parent::init();
-        $this->setLocale(locale()->getCurrent());
-        $this->setFormat(locale()->getOption(['time', 'dateFormat']));
+        $localeObj = Nip_Locale::instance();
+        $this->setLocale($localeObj->getCurrent());
+        $this->setFormat($localeObj->getOption(['time', 'dateFormat']));
     }
 
     public function getLocale()

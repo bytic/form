@@ -1,10 +1,5 @@
 <?php
 
-use function Nip\locale;
-
-/**
- * Class Nip_Form_Element_Dateselect
- */
 class Nip_Form_Element_Dateselect extends Nip_Form_Element_MultiElement
 {
     protected $_type = 'dateselect';
@@ -14,8 +9,10 @@ class Nip_Form_Element_Dateselect extends Nip_Form_Element_MultiElement
     public function init()
     {
         parent::init();
-        $this->setLocale(locale()->getCurrent());
-        $this->setFormat(locale()->getOption(['time', 'dateFormat']));
+
+        $localeObj = Nip_Locale::instance();
+        $this->setLocale($localeObj->getCurrent());
+        $this->setFormat($localeObj->getOption(['time', 'dateFormat']));
 
         $this->initSelects();
     }

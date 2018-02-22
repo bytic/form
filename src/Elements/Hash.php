@@ -20,39 +20,12 @@ class Nip_Form_Element_Hash extends Nip_Form_Element_Hidden
         $this->setValue($this->getSessionValue());
     }
 
-    public function getSessionName()
-    {
-        return $this->getForm()->getName() . '_' . $this->getSalt();
-    }
-
-    public function getSalt()
-    {
-        return sha1(__CLASS__);
-    }
-
     public function reset()
     {
         $name = $this->getSessionName();
         $hash = $this->_generateHash();
         $_SESSION[$name] = $hash;
         $this->setValue($hash);
-    }
-
-    protected function _generateHash()
-    {
-        return md5(
-            mt_rand(1, 1000000)
-            . $this->getSalt()
-            . $this->getName()
-            . session_id()
-            . mt_rand(1, 1000000)
-        );
-    }
-
-    public function getSessionValue()
-    {
-        $name = $this->getSessionName();
-        return $_SESSION[$name];
     }
 
     public function validate()
@@ -62,5 +35,33 @@ class Nip_Form_Element_Hash extends Nip_Form_Element_Hidden
         } elseif ($this->getValue() != $this->getSessionValue()) {
             $this->addError('Form security hash different from server');
         }
+    }
+
+    public function getSessionName()
+    {
+        return $this->getForm()->getName().'_'.$this->getSalt();
+    }
+
+    public function getSessionValue()
+    {
+        $name = $this->getSessionName();
+
+        return $_SESSION[$name];
+    }
+
+    public function getSalt()
+    {
+        return sha1(__CLASS__);
+    }
+
+    protected function _generateHash()
+    {
+        return md5(
+            mt_rand(1, 1000000)
+            .$this->getSalt()
+            .$this->getName()
+            .session_id()
+            .mt_rand(1, 1000000)
+        );
     }
 }
