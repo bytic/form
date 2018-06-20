@@ -13,7 +13,7 @@ class Nip_Form_Element_Timeselect extends Nip_Form_Element_MultiElement
 
     public function initSelects()
     {
-        if ( ! isset($this->elements['hours'])) {
+        if (! isset($this->elements['hours'])) {
             $hoursElement = $this->getForm()->getNewSelectElement();
 
             $hoursElement->addOption('-', 'HH');
@@ -26,7 +26,7 @@ class Nip_Form_Element_Timeselect extends Nip_Form_Element_MultiElement
         }
 
 
-        if ( ! isset($this->elements['minutes'])) {
+        if (! isset($this->elements['minutes'])) {
             $minutesElement = $this->getForm()->getNewSelectElement();
 
             $minutesElement->addOption('-', 'MM');
@@ -38,7 +38,7 @@ class Nip_Form_Element_Timeselect extends Nip_Form_Element_MultiElement
             $this->elements['minutes'] = $minutesElement;
         }
 
-        if ( ! isset($this->elements['seconds'])) {
+        if (! isset($this->elements['seconds'])) {
             $secondsElement = $this->getForm()->getNewSelectElement();
 
             $secondsElement->addOption('-', 'SS');
@@ -110,7 +110,7 @@ class Nip_Form_Element_Timeselect extends Nip_Form_Element_MultiElement
     public function validate()
     {
         parent::validate();
-        if ( ! $this->isError()) {
+        if (! $this->isError()) {
             $value = $this->getValue();
             if ($value) {
                 $expectedValue = str_pad(intval($this->elements['hours']->getValue()), 2, "0", STR_PAD_LEFT);
