@@ -1,4 +1,11 @@
 <?php
-interface Nip_Form_Element_Interface
+
+namespace Nip\Form\Elements;
+
+/**
+ * Interface ElementInterface
+ * @package Nip\Form\Elements
+ */
+interface ElementInterface
 {
 }
