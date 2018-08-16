@@ -3,11 +3,15 @@
 namespace Nip\Form;
 
 use Nip\Form\Renderer\AbstractRenderer;
+use Nip\Form\Traits\HasAttributesTrait;
+use Nip\Form\Traits\HasDisplayGroupsTrait;
+use Nip\Form\Traits\HasElementsTrait;
+use Nip\Form\Traits\HasErrorsTrait;
 use Nip\Form\Traits\MagicMethodElementsFormTrait;
+use Nip\Form\Traits\MessagesTrait;
 use Nip\Form\Traits\NewElementsMethods;
 use Nip\View;
 use Nip_Form_Button_Abstract as ButtonAbstract;
-use Nip_Form_DisplayGroup;
 use Nip_Form_Element_Abstract as ElementAbstract;
 
 /**
@@ -17,7 +21,12 @@ use Nip_Form_Element_Abstract as ElementAbstract;
 abstract class AbstractForm
 {
     use MagicMethodElementsFormTrait;
+    use HasElementsTrait;
     use NewElementsMethods;
+    use HasDisplayGroupsTrait;
+    use MessagesTrait;
+    use HasErrorsTrait;
+    use HasAttributesTrait;
 
     const ENCTYPE_URLENCODED = 'application/x-www-form-urlencoded';
     const ENCTYPE_MULTIPART = 'multipart/form-data';
@@ -27,22 +36,11 @@ abstract class AbstractForm
      */
     protected $methods = ['delete', 'get', 'post', 'put'];
 
-    protected $_attribs = [];
     protected $_options = [];
-    protected $_displayGroups = [];
-
-    protected $_elements = [];
-    protected $_elementsLabel;
-    protected $_elementsOrder = [];
-
     protected $_buttons;
 
     protected $_decorators = [];
     protected $_renderer;
-    protected $_messages = [
-        'error' => [],
-    ];
-    protected $_messageTemplates = [];
     protected $_cache;
 
     protected $controllerView = false;
@@ -77,96 +75,8 @@ abstract class AbstractForm
         return $this->setAttrib('action', (string)$action);
     }
 
-    /**
-     * @param $key
-     * @param $value
-     * @return $this
-     */
-    public function setAttrib($key, $value)
-    {
-        $key = (string)$key;
-        $this->_attribs[$key] = $value;
-
-        return $this;
-    }
-
     public function postInit()
     {
-    }
-
-    /**
-     * @param $name
-     * @param bool $label
-     * @param string $type
-     * @param bool $isRequired
-     * @return $this
-     */
-    public function add($name, $label = false, $type = 'input', $isRequired = false)
-    {
-        $label = ($label) ? $label : ucfirst($name);
-        $element = $this->getNewElement($type)
-            ->setName($name)
-            ->setLabel($label)
-            ->setRequired($isRequired);
-        $this->addElement($element);
-
-        return $this;
-    }
-
-    /**
-     * @param string $type
-     * @return ElementAbstract
-     */
-    public function getNewElement($type)
-    {
-        $className = $this->getElementClassName($type);
-
-        return $this->getNewElementByClass($className);
-    }
-
-    /**
-     * @param $type
-     * @return string
-     */
-    public function getElementClassName($type)
-    {
-        return 'Nip_Form_Element_'.ucfirst($type);
-    }
-
-    /**
-     * @param $className
-     * @return ElementAbstract
-     */
-    public function getNewElementByClass($className)
-    {
-        $element = new $className($this);
-
-        return $this->initNewElement($element);
-    }
-
-    /**
-     * @param ElementAbstract $element
-     * @return ElementAbstract
-     */
-    public function initNewElement($element)
-    {
-        $element->setForm($this);
-
-        return $element;
-    }
-
-    /**
-     * @param ElementAbstract $element
-     * @return $this
-     */
-    public function addElement(ElementAbstract $element)
-    {
-        $name = $element->getUniqueId();
-        $this->_elements[$name] = $element;
-        $this->_elementsLabel[$element->getLabel()] = $name;
-        $this->_elementsOrder[] = $name;
-
-        return $this;
     }
 
     /**
@@ -181,116 +91,6 @@ abstract class AbstractForm
         }
 
         return null;
-    }
-
-    /**
-     * @param $name
-     * @return ElementAbstract
-     */
-    public function getElement($name)
-    {
-        if (array_key_exists($name, $this->_elements)) {
-            return $this->_elements[$name];
-        }
-
-        return null;
-    }
-
-    /**
-     * @param $className
-     * @param $name
-     * @param bool $label
-     * @param bool $isRequired
-     * @return $this
-     */
-    public function addCustom($className, $name, $label = false, $isRequired = false)
-    {
-        $label = ($label) ? $label : ucfirst($name);
-        $element = $this->getNewElementByClass($className)
-            ->setName($name)
-            ->setLabel($label)
-            ->setRequired($isRequired);
-        $this->addElement($element);
-
-        return $this;
-    }
-
-    /**
-     * @param $name
-     * @return $this
-     */
-    public function removeElement($name)
-    {
-        unset($this->_elements[$name]);
-
-        $key = array_search($name, $this->_elementsOrder);
-        if ($key) {
-            unset($this->_elementsOrder[$key]);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add a display group
-     * Groups named elements for display purposes.
-     * @param array $elements
-     * @param $name
-     * @return $this
-     */
-    public function addDisplayGroup(array $elements, $name)
-    {
-        $group = $this->newDisplayGroup();
-        foreach ($elements as $element) {
-            if (isset($this->_elements[$element])) {
-                $add = $this->getElement($element);
-                if (null !== $add) {
-                    $group->addElement($add);
-                }
-            }
-        }
-        if (empty($group)) {
-            trigger_error('No valid elements specified for display group');
-        }
-
-        $name = (string)$name;
-        $group->setLegend($name);
-
-        $this->_displayGroups[$name] = $group;
-
-        return $this;
-    }
-
-    /**
-     * @return Nip_Form_DisplayGroup
-     */
-    public function newDisplayGroup()
-    {
-        $group = new Nip_Form_DisplayGroup();
-        $group->setForm($this);
-
-        return $group;
-    }
-
-    /**
-     * @param string $name
-     * @return Nip_Form_DisplayGroup
-     */
-    public function getDisplayGroup($name)
-    {
-        if (array_key_exists($name, $this->_displayGroups)) {
-            return $this->_displayGroups[$name];
-        }
-
-        return null;
-    }
-
-    /**
-     * @return Nip_Form_DisplayGroup[]
-     */
-    public function getDisplayGroups()
-    {
-        return $this->_displayGroups;
     }
 
     /**
@@ -336,57 +136,6 @@ abstract class AbstractForm
         return null;
     }
 
-    /**
-     * @param $name
-     * @return bool
-     */
-    public function hasElement($name)
-    {
-        return array_key_exists($name, $this->_elements);
-    }
-
-    /**
-     * @param $label
-     * @return ElementAbstract
-     */
-    public function getElementByLabel($label)
-    {
-        if (array_key_exists($label, $this->_elementsLabel)) {
-            return $this->_elements[$this->_elementsLabel[$label]];
-        }
-
-        return null;
-    }
-
-    /**
-     * @param $element
-     * @param $neighbour
-     * @param string $type
-     * @return $this
-     */
-    public function setElementOrder($element, $neighbour, $type = 'bellow')
-    {
-        if (in_array($element, $this->_elementsOrder) && in_array($neighbour, $this->_elementsOrder)) {
-            $newOrder = [];
-            foreach ($this->_elementsOrder as $current) {
-                if ($current == $element) {
-                } elseif ($current == $neighbour) {
-                    if ($type == 'above') {
-                        $newOrder[] = $element;
-                        $newOrder[] = $neighbour;
-                    } else {
-                        $newOrder[] = $neighbour;
-                        $newOrder[] = $element;
-                    }
-                } else {
-                    $newOrder[] = $current;
-                }
-            }
-            $this->_elementsOrder = $newOrder;
-        }
-
-        return $this;
-    }
 
     /**
      * @return ButtonAbstract[]
@@ -396,31 +145,6 @@ abstract class AbstractForm
         return $this->_buttons;
     }
 
-    /**
-     * @param bool $params
-     * @return array
-     */
-    public function findElements($params = false)
-    {
-        $elements = [];
-        foreach ($this->_elements as $element) {
-            if (isset($params['type'])) {
-                if ($element->getType() != $params['type']) {
-                    continue;
-                }
-            }
-            if (isset($params['attribs']) && is_array($params['attribs'])) {
-                foreach ($params['attribs'] as $name => $value) {
-                    if ($element->getAttrib($name) != $value) {
-                        continue(2);
-                    }
-                }
-            }
-            $elements[$element->getUniqueId()] = $element;
-        }
-
-        return $elements;
-    }
 
     /**
      * @param $key
@@ -465,20 +189,6 @@ abstract class AbstractForm
     }
 
     /**
-     * @param string $key
-     * @return string
-     */
-    public function getAttrib($key)
-    {
-        $key = (string)$key;
-        if (!isset($this->_attribs[$key])) {
-            return null;
-        }
-
-        return $this->_attribs[$key];
-    }
-
-    /**
      * @return $this
      */
     public function removeClass()
@@ -505,63 +215,6 @@ abstract class AbstractForm
     public function hasClass($class)
     {
         return in_array($class, explode(' ', $this->getAttrib('class')));
-    }
-
-    /**
-     * @return array
-     */
-    public function getAttribs()
-    {
-        return $this->_attribs;
-    }
-
-    /**
-     * @param  array $attribs
-     * @return $this
-     */
-    public function setAttribs(array $attribs)
-    {
-        $this->clearAttribs();
-
-        return $this->addAttribs($attribs);
-    }
-
-    /**
-     * @return $this
-     */
-    public function clearAttribs()
-    {
-        $this->_attribs = [];
-
-        return $this;
-    }
-
-    /**
-     * @param  array $attribs
-     * @return $this
-     */
-    public function addAttribs(array $attribs)
-    {
-        foreach ($attribs as $key => $value) {
-            $this->setAttrib($key, $value);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param $key
-     * @return bool
-     */
-    public function removeAttrib($key)
-    {
-        if (isset($this->_attribs[$key])) {
-            unset($this->_attribs[$key]);
-
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -659,19 +312,6 @@ abstract class AbstractForm
         }
     }
 
-    /**
-     * @return array
-     */
-    public function getElements()
-    {
-        $return = [];
-        foreach ($this->_elementsOrder as $current) {
-            $return[$current] = $this->_elements[$current];
-        }
-
-        return $return;
-    }
-
     public function processValidation()
     {
         $elements = $this->getElements();
@@ -690,86 +330,8 @@ abstract class AbstractForm
         return count($this->getErrors()) > 0 ? false : true;
     }
 
-    /**
-     * @return array
-     */
-    public function getErrors()
-    {
-        $errors = array_merge((array)$this->getMessagesType('error'), $this->getElementsErrors());
-
-        return $errors;
-    }
-
-    /**
-     * @param string $type
-     * @return mixed
-     */
-    public function getMessagesType($type = 'error')
-    {
-        return $this->_messages[$type];
-    }
-
-    /**
-     * @return array
-     */
-    public function getElementsErrors()
-    {
-        $elements = $this->getElements();
-        $errors = [];
-        if (is_array($elements)) {
-            foreach ($elements as $name => $element) {
-                $errors = array_merge($errors, $element->getErrors());
-            }
-        }
-
-        return $errors;
-    }
-
     public function process()
     {
-    }
-
-    /**
-     * @param $message
-     * @return $this
-     */
-    public function addError($message)
-    {
-        $this->_messages['error'][] = $message;
-
-        return $this;
-    }
-
-    /**
-     * @param $message
-     * @param string $type
-     * @return $this
-     */
-    public function addMessage($message, $type = 'error')
-    {
-        $this->_messages[$type][] = $message;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getMessages()
-    {
-        $messages = $this->_messages;
-        $messages['error'] = $this->getErrors();
-
-        return $messages;
-    }
-
-    /**
-     * @param string $name
-     * @return mixed
-     */
-    public function getMessageTemplate($name)
-    {
-        return isset($this->_messageTemplates[$name]) ? $this->_messageTemplates[$name] : null;
     }
 
 

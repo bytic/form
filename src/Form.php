@@ -1,10 +1,11 @@
 <?php
 
-use Nip\Form\AbstractForm;
+namespace Nip\Form;
 
 /**
- * Class Nip_Form
+ * Class Form
+ * @package Nip\Form
  */
-class Nip_Form extends AbstractForm
+class Form extends AbstractForm
 {
 }
