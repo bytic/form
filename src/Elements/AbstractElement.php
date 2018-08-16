@@ -3,7 +3,11 @@
 namespace Nip\Form\Elements;
 
 use Nip\Form\AbstractForm;
+use Nip\Form\Elements\Traits\HasAttributesTrait;
 use Nip\Form\Elements\Traits\HasDecoratorsTrait;
+use Nip\Form\Elements\Traits\HasOptionsTrait;
+use Nip\Form\Elements\Traits\HasRendererTrait;
+use Nip\Form\Elements\Traits\HasUniqueIdTrait;
 
 /**
  * Class AbstractElement
@@ -11,19 +15,15 @@ use Nip\Form\Elements\Traits\HasDecoratorsTrait;
  */
 abstract class AbstractElement implements ElementInterface
 {
+    use HasUniqueIdTrait;
+    use HasAttributesTrait;
+    use HasOptionsTrait;
     use HasDecoratorsTrait;
+    use HasRendererTrait;
 
     protected $_form;
 
-    protected $_options;
-
-    /**
-     * @var null|string
-     */
-    protected $_uniqueID = null;
-
     protected $_isRequired;
-    protected $_isRendered = false;
     protected $_errors = [];
     protected $_policies;
 
@@ -39,57 +39,6 @@ abstract class AbstractElement implements ElementInterface
     {
     }
 
-
-    /**
-     * @return string
-     */
-    public function getJSID()
-    {
-        $name = $this->getUniqueId();
-
-        return str_replace(['][', '[', ']'], ['-', '-', ''], $this->getUniqueId());
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getUniqueId()
-    {
-        if (!$this->_uniqueID) {
-            $this->initUniqueId();
-        }
-
-        return $this->_uniqueID;
-    }
-
-    /**
-     * @param null|string $uniqueID
-     */
-    public function setUniqueID($uniqueID)
-    {
-        $this->_uniqueID = $uniqueID;
-    }
-
-    protected function initUniqueId()
-    {
-        $this->setUniqueID($this->generateUniqueId());
-    }
-
-    /**
-     * @return null|string
-     */
-    protected function generateUniqueId()
-    {
-        $name = $this->getName();
-        $registeredNames = (array)$this->getForm()->getCache('elements_names');
-        if (in_array($name, $registeredNames)) {
-            $name = uniqid($name);
-        }
-        $registeredNames[] = $name;
-        $this->getForm()->setCache('elements_names', $registeredNames);
-
-        return $name;
-    }
 
     /**
      * @return AbstractForm
@@ -158,25 +107,6 @@ abstract class AbstractElement implements ElementInterface
         return $this;
     }
 
-    /**
-     * @param boolean $isRendered
-     * @return $this
-     */
-    public function setRendered($isRendered)
-    {
-        $this->_isRendered = (bool)$isRendered;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isRendered()
-    {
-        return (bool)$this->_isRendered;
-    }
-
     public function validate()
     {
         if ($this->isRequired() && !$this->getValue()) {
@@ -241,72 +171,5 @@ abstract class AbstractElement implements ElementInterface
     public function getType()
     {
         return $this->_type;
-    }
-
-    /**
-     * @param $key
-     * @param $value
-     * @return $this
-     */
-    public function setOption($key, $value)
-    {
-        $key = (string)$key;
-        $this->_options[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * @param string $key
-     * @return null
-     */
-    public function getOption($key)
-    {
-        $key = (string)$key;
-        if (!isset($this->_options[$key])) {
-            return null;
-        }
-
-        return $this->_options[$key];
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasCustomRenderer()
-    {
-        return false;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function render()
-    {
-        return $this->getRenderer()->render($this);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRenderer()
-    {
-        return $this->getForm()->getRenderer()->getElementRenderer($this);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function renderElement()
-    {
-        return $this->getRenderer()->renderElement($this);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function renderErrors()
-    {
-        return $this->getRenderer()->renderErrors($this);
     }
 }
