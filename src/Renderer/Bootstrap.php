@@ -2,6 +2,8 @@
 
 use Nip\Form\Renderer\AbstractRenderer;
 
+use Nip\Form\Elements\AbstractElement;
+
 class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
 {
 
@@ -102,10 +104,10 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
     }
 
     /**
-     * @param Nip_Form_Element_Abstract $element
+     * @param AbstractElement $element
      * @return mixed
      */
-    public function renderElement(Nip_Form_Element_Abstract $element)
+    public function renderElement(AbstractElement $element)
     {
         $element->addClass('form-control');
 

@@ -7,6 +7,7 @@ use Nip\Form\Elements\Traits\HasAttributesTrait;
 use Nip\Form\Elements\Traits\HasDecoratorsTrait;
 use Nip\Form\Elements\Traits\HasOptionsTrait;
 use Nip\Form\Elements\Traits\HasRendererTrait;
+use Nip\Form\Elements\Traits\HasTypeTrait;
 use Nip\Form\Elements\Traits\HasUniqueIdTrait;
 
 /**
@@ -20,6 +21,7 @@ abstract class AbstractElement implements ElementInterface
     use HasOptionsTrait;
     use HasDecoratorsTrait;
     use HasRendererTrait;
+    use HasTypeTrait;
 
     protected $_form;
 

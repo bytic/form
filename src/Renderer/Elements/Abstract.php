@@ -2,6 +2,8 @@
 
 use Nip\Form\Renderer\AbstractRenderer;
 
+use Nip\Form\Elements\AbstractElement;
+
 abstract class Nip_Form_Renderer_Elements_Abstract
 {
     protected $_renderer;
@@ -81,7 +83,7 @@ abstract class Nip_Form_Renderer_Elements_Abstract
         return $this->_element;
     }
 
-    public function setElement(Nip_Form_Element_Abstract $element)
+    public function setElement(AbstractElement $element)
     {
         $this->_element = $element;
 
