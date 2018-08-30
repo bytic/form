@@ -2,7 +2,7 @@
 
 namespace Nip\Form\Traits;
 
-use Nip_Form_Element_Abstract as ElementAbstract;
+use Nip\Form\Elements\AbstractElement;
 
 /**
  * Trait HasElementsTrait
@@ -16,10 +16,10 @@ trait HasElementsTrait
 
 
     /**
-     * @param ElementAbstract $element
+     * @param AbstractElement $element
      * @return $this
      */
-    public function addElement(ElementAbstract $element)
+    public function addElement(AbstractElement $element)
     {
         $name = $element->getUniqueId();
         $this->_elements[$name] = $element;
@@ -47,7 +47,7 @@ trait HasElementsTrait
 
     /**
      * @param $name
-     * @return ElementAbstract
+     * @return AbstractElement
      */
     public function getElement($name)
     {
@@ -59,7 +59,7 @@ trait HasElementsTrait
     }
 
     /**
-     * @return \Nip_Form_Element_Abstract[]
+     * @return AbstractElement[]
      */
     public function getElements()
     {
@@ -82,7 +82,7 @@ trait HasElementsTrait
 
     /**
      * @param $label
-     * @return ElementAbstract
+     * @return AbstractElement
      */
     public function getElementByLabel($label)
     {
