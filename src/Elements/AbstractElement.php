@@ -27,8 +27,6 @@ abstract class AbstractElement implements ElementInterface
     protected $_errors = [];
     protected $_policies;
 
-    protected $_type = 'abstract';
-
     public function __construct($form)
     {
         $this->setForm($form);
@@ -113,7 +111,7 @@ abstract class AbstractElement implements ElementInterface
             $message = $this->getForm()->getMessageTemplate('no-'.$this->getName());
             if (!$message) {
                 $translateSlug = 'general.form.errors.required';
-                $message = app('translator')->translate($translateSlug, array('label' => $this->getLabel()));
+                $message = app('translator')->translate($translateSlug, ['label' => $this->getLabel()]);
                 if ($message == $translateSlug) {
                     $message = $message ? $message : 'The field `'.$this->getLabel().'` is mandatory.';
                 }
@@ -163,13 +161,5 @@ abstract class AbstractElement implements ElementInterface
     public function isGroup()
     {
         return false;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->_type;
     }
 }
