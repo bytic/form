@@ -10,7 +10,7 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
     public function init()
     {
         parent::init();
-        $localeObj = Nip_Locale::instance();
+        $localeObj = app('locale');
         $this->setLocale($localeObj->getCurrent());
         $this->setFormat($localeObj->getOption(['time', 'dateFormat']));
     }
@@ -37,7 +37,7 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
 
     public function setTime($time)
     {
-        $this->_hasTime = (bool) $time;
+        $this->_hasTime = (bool)$time;
     }
 
     public function hasTime()
@@ -52,12 +52,15 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
                 $dateUnix = strtotime($data);
                 if ($dateUnix && $dateUnix !== false && $dateUnix > -62169989992) {
                     $this->setValue(date($this->_format, $dateUnix));
+
                     return $this;
                 }
             }
             $this->setValue('');
+
             return $this;
         }
+
         return parent::getData($data, $source);
     }
 
@@ -78,6 +81,7 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
                 $value = date('Y-m-d', $unixTime);
             }
         }
+
         return $value;
     }
 
@@ -101,10 +105,11 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
             $unixTime = $this->getUnix($format);
             if ($unixTime) {
                 $this->setValue(date($format, $unixTime));
+
                 return true;
             }
-            $message = $this->getForm()->getMessageTemplate('bad-' . $this->getName());
-            $message = $message ? $message : 'I couldn\'t parse the ' . strtolower($this->getLabel()) . ' you entered';
+            $message = $this->getForm()->getMessageTemplate('bad-'.$this->getName());
+            $message = $message ? $message : 'I couldn\'t parse the '.strtolower($this->getLabel()).' you entered';
             $this->addError($message);
         }
     }

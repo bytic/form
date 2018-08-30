@@ -6,7 +6,7 @@ use Nip\Form\AbstractForm;
 use Nip\Helpers\View\Errors as ErrorsHelper;
 use Nip\Helpers\View\Messages as MessagesHelper;
 use Nip_Form_Button_Abstract;
-use Nip_Form_Element_Abstract as AbstractElement;
+use Nip\Form\Elements\AbstractElement;
 use Nip_Form_Renderer_Button_Abstract as AbstractButtonRenderer;
 use Nip_Form_Renderer_Elements_Abstract as AbstractElementRenderer;
 
