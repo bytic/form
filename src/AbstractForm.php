@@ -4,6 +4,7 @@ namespace Nip\Form;
 
 use Nip\Form\Renderer\AbstractRenderer;
 use Nip\Form\Traits\HasAttributesTrait;
+use Nip\Form\Traits\HasClassTrait;
 use Nip\Form\Traits\HasDisplayGroupsTrait;
 use Nip\Form\Traits\HasElementsTrait;
 use Nip\Form\Traits\HasErrorsTrait;
@@ -27,6 +28,7 @@ abstract class AbstractForm
     use MessagesTrait;
     use HasErrorsTrait;
     use HasAttributesTrait;
+    use HasClassTrait;
 
     const ENCTYPE_URLENCODED = 'application/x-www-form-urlencoded';
     const ENCTYPE_MULTIPART = 'multipart/form-data';
@@ -171,50 +173,6 @@ abstract class AbstractForm
         }
 
         return $this->_options[$key];
-    }
-
-    /**
-     * @return $this
-     */
-    public function addClass()
-    {
-        $classes = func_get_args();
-        if (is_array($classes)) {
-            $oldClasses = explode(' ', $this->getAttrib('class'));
-            $classes = array_merge($classes, $oldClasses);
-            $this->setAttrib('class', implode(' ', $classes));
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function removeClass()
-    {
-        $removeClasses = func_get_args();
-        if (is_array($removeClasses)) {
-            $classes = explode(' ', $this->getAttrib('class'));
-            foreach ($removeClasses as $class) {
-                $key = array_search($class, $classes);
-                if ($key !== false) {
-                    unset($classes[$key]);
-                }
-            }
-            $this->setAttrib('class', implode(' ', $classes));
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param string $class
-     * @return bool
-     */
-    public function hasClass($class)
-    {
-        return in_array($class, explode(' ', $this->getAttrib('class')));
     }
 
     /**
