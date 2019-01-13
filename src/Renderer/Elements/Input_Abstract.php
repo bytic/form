@@ -1,4 +1,5 @@
 <?php
+
 abstract class Nip_Form_Renderer_Elements_Input_Abstract extends Nip_Form_Renderer_Elements_Abstract
 {
     public function generateElement()
@@ -6,6 +7,7 @@ abstract class Nip_Form_Renderer_Elements_Input_Abstract extends Nip_Form_Render
         $return = '<input ';
         $return .= $this->renderAttributes();
         $return .= ' />';
+
         return $return;
     }
 
@@ -16,6 +18,7 @@ abstract class Nip_Form_Renderer_Elements_Input_Abstract extends Nip_Form_Render
         $attribs[] = 'value';
         $attribs[] = 'placeholder';
         $attribs[] = 'size';
+
         return $attribs;
     }
 }

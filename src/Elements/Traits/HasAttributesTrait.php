@@ -78,6 +78,14 @@ trait HasAttributesTrait
     }
 
     /**
+     * @return bool
+     */
+    public function hasValue()
+    {
+        return !empty($this->getAttrib('value'));
+    }
+
+    /**
      * @param $value
      * @return $this
      */

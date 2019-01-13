@@ -2,27 +2,28 @@
 
 /**
  * Class Nip_Form_Renderer_Elements_RadioGroup
+ *
+ * @method \Nip_Form_Element_RadioGroup getElement()
  */
 class Nip_Form_Renderer_Elements_RadioGroup extends Nip_Form_Renderer_Elements_Input_Group
 {
-
     /**
      * @return string
      */
     public function generateElement()
     {
-        $this->_checkValue();
+        $this->checkDefaultValue();
 
         return parent::generateElement();
     }
-    
-    protected function _checkValue()
+
+    protected function checkDefaultValue()
     {
-        if (!$this->getElement()->getValue()) {
+        if (!$this->getElement()->hasValue() && $this->getElement()->isAutoSelectFirst()) {
             $elements = $this->getElement()->getElements();
             if ($elements) {
                 $element = reset($elements);
-                $this->getElement()->setValue($element->getValue());
+                $element->setChecked(true);
             }
         }
     }

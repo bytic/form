@@ -2,6 +2,9 @@
 
 class Nip_Form_Renderer_Elements_Radio extends Nip_Form_Renderer_Elements_Input_Abstract
 {
+    /**
+     * @return string
+     */
     public function generateElement()
     {
         $this->getElement()->addClass('form-check-input');
@@ -17,6 +20,9 @@ class Nip_Form_Renderer_Elements_Radio extends Nip_Form_Renderer_Elements_Input_
         return $return;
     }
 
+    /**
+     * @return string
+     */
     public function renderInput()
     {
         return parent::generateElement();

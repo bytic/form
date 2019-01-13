@@ -5,6 +5,7 @@ use Nip_Form_Element_Input_Abstract as AbstractInput;
 
 /**
  * Class Nip_Form_Renderer_Elements_Input_Group
+ * @method Nip_Form_Element_Input_Group getElement()
  */
 abstract class Nip_Form_Renderer_Elements_Input_Group extends Nip_Form_Renderer_Elements_Input_Abstract
 {
@@ -22,6 +23,7 @@ abstract class Nip_Form_Renderer_Elements_Input_Group extends Nip_Form_Renderer_
             $returnElements[] = $this->renderChildElement($element);
         }
         $return .= implode($this->getSeparator(), $returnElements);
+
         return $return;
     }
 
@@ -34,6 +36,7 @@ abstract class Nip_Form_Renderer_Elements_Input_Group extends Nip_Form_Renderer_
         if ($element->getValue() == $this->getElement()->getValue()) {
             $element->setChecked(true);
         }
+
         return $element->render();
     }
 
@@ -52,6 +55,7 @@ abstract class Nip_Form_Renderer_Elements_Input_Group extends Nip_Form_Renderer_
     public function setSeparator($separator)
     {
         $this->_separator = $separator;
+
         return $this;
     }
 }
