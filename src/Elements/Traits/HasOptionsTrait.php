@@ -25,12 +25,23 @@ trait HasOptionsTrait
 
     /**
      * @param string $key
+     * @return bool
+     */
+    public function hasOption($key)
+    {
+        $key = (string)$key;
+
+        return isset($this->_options[$key]);
+    }
+
+    /**
+     * @param string $key
      * @return null
      */
     public function getOption($key)
     {
         $key = (string)$key;
-        if (!isset($this->_options[$key])) {
+        if (!$this->hasOption($key)) {
             return null;
         }
 
