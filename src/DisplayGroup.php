@@ -1,18 +1,15 @@
 <?php
 
-use Nip\Collection;
+use Nip\Collections\Collection;
 use Nip\Form\AbstractForm;
+use Nip\Form\Elements\AbstractElement;
 
 /**
  * Class Nip_Form_DisplayGroup
  */
 class Nip_Form_DisplayGroup extends Collection
 {
-    /**
-     * Group attributes
-     * @var array
-     */
-    protected $_attribs = [];
+    use \Nip\Form\Utility\HasAttributesTrait;
 
     /**
      * @var Nip_Form
@@ -41,10 +38,10 @@ class Nip_Form_DisplayGroup extends Collection
     }
 
     /**
-     * @param Nip_Form_Element_Abstract $element
+     * @param AbstractElement $element
      * @return $this
      */
-    public function addElement(Nip_Form_Element_Abstract $element)
+    public function addElement(AbstractElement $element)
     {
         $this[$element->getUniqueId()] = $element;
 
@@ -57,20 +54,7 @@ class Nip_Form_DisplayGroup extends Collection
      */
     public function setLegend($legend)
     {
-        return $this->setAttrib('legend', (string) $legend);
-    }
-
-    /**
-     * @param $key
-     * @param $value
-     * @return $this
-     */
-    public function setAttrib($key, $value)
-    {
-        $key = (string) $key;
-        $this->_attribs[$key] = $value;
-
-        return $this;
+        return $this->setAttrib('legend', (string)$legend);
     }
 
     /**
@@ -79,77 +63,6 @@ class Nip_Form_DisplayGroup extends Collection
     public function getLegend()
     {
         return $this->getAttrib('legend');
-    }
-
-    /**
-     * @param string $key
-     * @return mixed|null
-     */
-    public function getAttrib($key)
-    {
-        $key = (string) $key;
-        if (!isset($this->_attribs[$key])) {
-            return null;
-        }
-
-        return $this->_attribs[$key];
-    }
-
-    /**
-     * @return array
-     */
-    public function getAttribs()
-    {
-        return $this->_attribs;
-    }
-
-    /**
-     * @param array $attribs
-     * @return Nip_Form_DisplayGroup
-     */
-    public function setAttribs(array $attribs)
-    {
-        $this->clearAttribs();
-
-        return $this->addAttribs($attribs);
-    }
-
-    /**
-     * @return $this
-     */
-    public function clearAttribs()
-    {
-        $this->_attribs = [];
-
-        return $this;
-    }
-
-    /**
-     * @param array $attribs
-     * @return $this
-     */
-    public function addAttribs(array $attribs)
-    {
-        foreach ($attribs as $key => $value) {
-            $this->setAttrib($key, $value);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param $key
-     * @return bool
-     */
-    public function removeAttrib($key)
-    {
-        if (array_key_exists($key, $this->_attribs)) {
-            unset($this->_attribs[$key]);
-
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -179,6 +92,7 @@ class Nip_Form_DisplayGroup extends Collection
     public function getNewRenderer($type = 'basic')
     {
         $name = 'Nip_Form_Renderer_DisplayGroup';
+        /** @var Nip_Form_Renderer_DisplayGroup $renderer */
         $renderer = new $name();
         $renderer->setGroup($this);
 
