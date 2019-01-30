@@ -87,7 +87,7 @@ trait HasAttributesTrait
 
     /**
      * @param $value
-     * @return $this
+     * @return static|self
      */
     public function setValue($value)
     {
