@@ -1,11 +1,19 @@
 <?php
-class Nip_Form_Decorator_Elements_Text extends Nip_Form_Decorator_Elements_Abstract
+
+namespace Nip\Form\Decorator\Elements;
+
+/**
+ * Class Text
+ * @package Nip\Form\Decorator\Elements
+ */
+class Text extends AbstractDecorator
 {
     protected $_content;
 
     public function setText($text)
     {
         $this->_content = $text;
+
         return $this;
     }
 

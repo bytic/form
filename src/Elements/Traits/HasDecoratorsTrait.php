@@ -2,7 +2,8 @@
 
 namespace Nip\Form\Elements\Traits;
 
-use Nip_Form_Decorator_Elements_Abstract;
+use Nip\Form\Decorator\DecoratorFactory;
+use Nip\Form\Decorator\Elements\AbstractDecorator;
 
 /**
  * Trait HasDecoratorsTrait
@@ -10,7 +11,7 @@ use Nip_Form_Decorator_Elements_Abstract;
  */
 trait HasDecoratorsTrait
 {
-    protected $_decorators;
+    protected $decorators;
 
     /**
      * @param string $type
@@ -18,27 +19,34 @@ trait HasDecoratorsTrait
      */
     public function newDecorator($type = '')
     {
-        $name = 'Nip_Form_Decorator_Elements_'.ucfirst($type);
-        $decorator = new $name();
-        $decorator->setElement($this);
+        return DecoratorFactory::createForElement($this, $type);
+    }
 
+    /**
+     * @param string $type
+     * @return mixed
+     */
+    public function addDecorator($type = '', $position = 'element', $name = false)
+    {
+        $decorator = $this->newDecorator($type);
+        $this->attachDecorator($decorator, $position, $name);
         return $decorator;
     }
 
     /**
-     * @param Nip_Form_Decorator_Elements_Abstract $decorator
+     * @param AbstractDecorator $decorator
      * @param string $position
      * @param bool $name
      * @return $this
      */
     public function attachDecorator(
-        Nip_Form_Decorator_Elements_Abstract $decorator,
+        AbstractDecorator $decorator,
         $position = 'element',
         $name = false
     ) {
         $decorator->setElement($this);
         $name = $name ? $name : $decorator->getName();
-        $this->_decorators[$position][$name] = $decorator;
+        $this->decorators[$position][$name] = $decorator;
 
         return $this;
     }
@@ -49,7 +57,7 @@ trait HasDecoratorsTrait
      */
     public function getDecoratorsByPosition($position)
     {
-        return $this->_decorators[$position];
+        return $this->decorators[$position];
     }
 
     /**
@@ -60,9 +68,9 @@ trait HasDecoratorsTrait
     public function getDecorator($name, $position = false)
     {
         if ($position) {
-            return $this->_decorators[$position][$name];
+            return $this->decorators[$position][$name];
         } else {
-            foreach ($this->_decorators as $position => $decorators) {
+            foreach ($this->decorators as $position => $decorators) {
                 if (isset($decorators[$name])) {
                     return $decorators[$name];
                 }
@@ -80,9 +88,9 @@ trait HasDecoratorsTrait
     public function removeDecorator($name, $position = false)
     {
         if ($position) {
-            unset($this->_decorators[$position][$name]);
+            unset($this->decorators[$position][$name]);
         } else {
-            foreach ($this->_decorators as $position => $decorators) {
+            foreach ($this->decorators as $position => $decorators) {
                 if (isset($decorators[$name])) {
                     unset($decorators[$name]);
 
