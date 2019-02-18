@@ -73,5 +73,4 @@ trait HasDisplayGroupsTrait
     {
         return $this->_displayGroups;
     }
-
 }
