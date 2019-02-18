@@ -24,6 +24,8 @@ trait HasDecoratorsTrait
 
     /**
      * @param string $type
+     * @param string $position
+     * @param bool|string $name
      * @return mixed
      */
     public function addDecorator($type = '', $position = 'element', $name = false)
