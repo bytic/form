@@ -115,7 +115,7 @@ abstract class Nip_Form_Renderer_Elements_Abstract
     {
         $attribs = $this->getElement()->getAttribs();
         if (!isset($attribs['title'])) {
-            $attribs['title'] = $this->getElement()->getLabel();
+            $attribs['title'] = strip_tags($this->getElement()->getLabel());
         }
         $elementAttribs = $this->getElementAttribs();
         $return = '';
