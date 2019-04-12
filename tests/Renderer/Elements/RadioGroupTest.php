@@ -65,6 +65,7 @@ class RadioGroupTest extends AbstractTest
             .'</div>',
             $html
         );
+        self::assertSame(null, $renderer->getElement()->getValue());
     }
 
     /**
@@ -75,6 +76,7 @@ class RadioGroupTest extends AbstractTest
         $input = new \Nip_Form_Element_RadioGroup(new \Nip\Form\Form());
         $render = new \Nip_Form_Renderer_Elements_RadioGroup();
         $render->setElement($input);
+
         return $render;
     }
 }
