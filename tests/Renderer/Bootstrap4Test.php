@@ -11,7 +11,6 @@ use Nip\Form\Tests\AbstractTest;
  */
 class Bootstrap4Test extends AbstractTest
 {
-
     public function testRenderRow()
     {
         $form = new Form();
