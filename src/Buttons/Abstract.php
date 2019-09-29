@@ -4,6 +4,9 @@ use Nip\Form\AbstractForm;
 
 abstract class Nip_Form_Button_Abstract
 {
+    use \Nip\Form\Traits\HasClassTrait;
+    use \Nip\Form\Traits\HasAttributesTrait;
+
     protected $_form;
     protected $_attribs;
     protected $_uniqueID;
@@ -19,44 +22,6 @@ abstract class Nip_Form_Button_Abstract
     public function init()
     {
         $this->addClass('btn', 'btn-primary');
-    }
-
-    public function addClass()
-    {
-        $classes = func_get_args();
-        if (is_array($classes)) {
-            $oldClasses = explode(' ', $this->getAttrib('class'));
-            $classes = array_merge($classes, $oldClasses);
-            $this->setAttrib('class', implode(' ', $classes));
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param string $key
-     *
-     * @return string
-     */
-    public function getAttrib($key)
-    {
-        $key = (string) $key;
-        if (!isset($this->_attribs[$key])) {
-            return null;
-        }
-
-        return $this->_attribs[$key];
-    }
-
-    /**
-     * @return Nip_Form_Button_Abstract
-     */
-    public function setAttrib($key, $value)
-    {
-        $key = (string) $key;
-        $this->_attribs[$key] = $value;
-
-        return $this;
     }
 
     public function setId($id)
@@ -135,59 +100,6 @@ abstract class Nip_Form_Button_Abstract
         unset($this->_attribs[$key]);
 
         return true;
-    }
-
-    public function getAttribs()
-    {
-        return $this->_attribs;
-    }
-
-    /**
-     * @param  array $attribs
-     * @return Nip_Form_Button_Abstract
-     */
-    public function setAttribs(array $attribs)
-    {
-        $this->clearAttribs();
-
-        return $this->addAttribs($attribs);
-    }
-
-    /**
-     * @return Nip_Form_Button_Abstract
-     */
-    public function clearAttribs()
-    {
-        $this->_attribs = [];
-
-        return $this;
-    }
-
-    /**
-     * @param  array $attribs
-     * @return Nip_Form_Button_Abstract
-     */
-    public function addAttribs(array $attribs)
-    {
-        foreach ($attribs as $key => $value) {
-            $this->setAttrib($key, $value);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function removeAttrib($key)
-    {
-        if (isset($this->_attribs[$key])) {
-            unset($this->_attribs[$key]);
-
-            return true;
-        }
-
-        return false;
     }
 
     public function render()
