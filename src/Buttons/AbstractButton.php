@@ -1,14 +1,19 @@
 <?php
 
+namespace Nip\Form\Buttons;
+
 use Nip\Form\AbstractForm;
 
-abstract class Nip_Form_Button_Abstract
+/**
+ * Class AbstractButton
+ * @package Nip\Form\Buttons
+ */
+abstract class AbstractButton
 {
     use \Nip\Form\Traits\HasClassTrait;
     use \Nip\Form\Traits\HasAttributesTrait;
 
     protected $_form;
-    protected $_attribs;
     protected $_uniqueID;
 
     protected $_type = 'abstract';

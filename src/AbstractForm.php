@@ -12,7 +12,7 @@ use Nip\Form\Traits\MagicMethodElementsFormTrait;
 use Nip\Form\Traits\MessagesTrait;
 use Nip\Form\Traits\NewElementsMethods;
 use Nip\View;
-use Nip_Form_Button_Abstract as ButtonAbstract;
+use Nip\Form\Buttons\AbstractButton as ButtonAbstract;
 use Nip_Form_Element_Abstract as ElementAbstract;
 
 /**

@@ -3,11 +3,10 @@
 namespace Nip\Form\Renderer;
 
 use Nip\Form\AbstractForm;
+use Nip\Form\Renderer\Traits\HasButtonRendererTrait;
 use Nip\Helpers\View\Errors as ErrorsHelper;
 use Nip\Helpers\View\Messages as MessagesHelper;
-use Nip_Form_Button_Abstract;
 use Nip\Form\Elements\AbstractElement;
-use Nip_Form_Renderer_Button_Abstract as AbstractButtonRenderer;
 use Nip_Form_Renderer_Elements_Abstract as AbstractElementRenderer;
 
 /**
@@ -16,12 +15,12 @@ use Nip_Form_Renderer_Elements_Abstract as AbstractElementRenderer;
  */
 abstract class AbstractRenderer
 {
+    use HasButtonRendererTrait;
+
     protected $form;
 
     protected $elements;
     protected $elementsRenderer;
-
-    protected $buttonsRenderer = [];
 
     /**
      * AbstractRenderer constructor.
@@ -174,25 +173,6 @@ abstract class AbstractRenderer
     /**
      * @return string
      */
-    public function renderButtons()
-    {
-        $return = '';
-        $buttons = $this->getForm()->getButtons();
-        if ($buttons) {
-            $return .= '<div class="form-actions">';
-            foreach ($buttons as $button) {
-                $return .= $button->render() . "\n";
-            }
-            $return .= '    <div class="clear"></div>';
-            $return .= '</div>';
-        }
-
-        return $return;
-    }
-
-    /**
-     * @return string
-     */
     public function closeTag()
     {
         $return = '</form>';
@@ -253,36 +233,6 @@ abstract class AbstractRenderer
         $renderer = new $name();
         $renderer->setRenderer($this);
         $renderer->setElement($element);
-
-        return $renderer;
-    }
-
-    /**
-     * @param Nip_Form_Button_Abstract $button
-     * @return mixed
-     */
-    public function getButtonRenderer(Nip_Form_Button_Abstract $button)
-    {
-        $name = $button->getName();
-        if (!isset($this->buttonsRenderer[$name])) {
-            $this->buttonsRenderer[$name] = $this->getNewButtonRenderer($button);
-        }
-
-        return $this->buttonsRenderer[$name];
-    }
-
-    /**
-     * @param Nip_Form_Button_Abstract $button
-     * @return mixed
-     */
-    protected function getNewButtonRenderer(Nip_Form_Button_Abstract $button)
-    {
-        $type = $button->getType();
-        $name = 'Nip_Form_Renderer_Button_' . ucfirst($type);
-        /** @var AbstractButtonRenderer $renderer */
-        $renderer = new $name();
-        $renderer->setRenderer($this);
-        $renderer->setItem($button);
 
         return $renderer;
     }

@@ -1,6 +1,7 @@
 <?php
 
 use Nip\Form\Renderer\AbstractRenderer;
+use Nip\Form\Buttons\AbstractButton;
 
 /**
  * Class Nip_Form_Renderer_Button_Abstract
@@ -31,10 +32,10 @@ abstract class Nip_Form_Renderer_Button_Abstract
     }
 
     /**
-     * @param Nip_Form_Button_Abstract $item
+     * @param AbstractButton $item
      * @return $this
      */
-    public function setItem(Nip_Form_Button_Abstract $item)
+    public function setItem(AbstractButton $item)
     {
         $this->_item = $item;
 
@@ -42,7 +43,7 @@ abstract class Nip_Form_Renderer_Button_Abstract
     }
 
     /**
-     * @return Nip_Form_Button_Abstract
+     * @return AbstractButton
      */
     public function getItem()
     {
