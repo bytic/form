@@ -29,9 +29,15 @@ abstract class AbstractElement implements ElementInterface
     protected $_errors = [];
     protected $_policies;
 
-    public function __construct($form)
+    /**
+     * AbstractElement constructor.
+     * @param null $form
+     */
+    public function __construct($form = null)
     {
-        $this->setForm($form);
+        if ($form) {
+            $this->setForm($form);
+        }
         $this->init();
     }
 

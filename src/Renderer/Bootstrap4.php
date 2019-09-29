@@ -18,7 +18,7 @@ class Nip_Form_Renderer_Bootstrap4 extends Nip_Form_Renderer_Bootstrap
                 return $element->render();
             }
 
-            $return .= '<div class="form-group row row-'.$element->getUniqueId().($element->isError() ? ' has-error' : '').'">';
+            $return .= '<div class="form-group row-'.$element->getUniqueId().($element->isError() ? ' has-error' : '').'">';
 
             $renderLabel = $element->getOption('render_label');
             if ($renderLabel !== false) {
@@ -30,7 +30,7 @@ class Nip_Form_Renderer_Bootstrap4 extends Nip_Form_Renderer_Bootstrap
                 $class = $element->getType() == 'checkbox' ? 'col-sm-offset-3 col-sm-9' : 'col-sm-9';
             }
 
-            $return .= '<div class="'.$class.'">';
+            $return .= $class ? '<div class="'.$class.'">' : '';
             $return .= $this->renderElement($element);
 
             $helpBlock = $element->getOption('form-help');
@@ -39,7 +39,7 @@ class Nip_Form_Renderer_Bootstrap4 extends Nip_Form_Renderer_Bootstrap
             }
 
             $return .= $element->renderErrors();
-            $return .= '</div>';
+            $return .= $class ? '</div>' : '';
             $return .= '</div>';
         }
 
