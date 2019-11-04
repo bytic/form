@@ -7,7 +7,7 @@ use Nip\Form\Renderer\Traits\HasButtonRendererTrait;
 use Nip\Helpers\View\Errors as ErrorsHelper;
 use Nip\Helpers\View\Messages as MessagesHelper;
 use Nip\Form\Elements\AbstractElement;
-use Nip_Form_Renderer_Elements_Abstract as AbstractElementRenderer;
+use AbstractElement as AbstractElementRenderer;
 
 /**
  * Class AbstractRenderer

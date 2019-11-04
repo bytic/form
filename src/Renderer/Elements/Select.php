@@ -1,5 +1,5 @@
 <?php
-class Nip_Form_Renderer_Elements_Select extends Nip_Form_Renderer_Elements_Abstract
+class Nip_Form_Renderer_Elements_Select extends AbstractElement
 {
     public function generateElement()
     {

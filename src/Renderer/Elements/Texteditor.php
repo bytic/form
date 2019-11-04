@@ -1,8 +1,12 @@
 <?php
+
 class Nip_Form_Renderer_Elements_Texteditor extends Nip_Form_Renderer_Elements_Textarea
 {
     protected $_editorClass = 'mceAdvanced';
 
+    /**
+     * @inheritDoc
+     */
     public function generateElement()
     {
         if (!$this->getElement()->getAttrib('id')) {
@@ -13,6 +17,9 @@ class Nip_Form_Renderer_Elements_Texteditor extends Nip_Form_Renderer_Elements_T
         return $return;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getElementAttribs()
     {
         $attribs = parent::getElementAttribs();

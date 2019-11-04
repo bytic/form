@@ -1,8 +1,7 @@
 <?php
 
-use Nip\Form\Renderer\AbstractRenderer;
-
 use Nip\Form\Elements\AbstractElement;
+use Nip\Form\Renderer\AbstractRenderer;
 
 class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
 {
@@ -48,7 +47,7 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
                 return $element->render();
             }
 
-            $return .= '<div class="form-group row-'.$element->getUniqueId().($element->isError() ? ' has-error' : '').'">';
+            $return .= '<div class="form-group row-' . $element->getUniqueId() . ($element->isError() ? ' has-error' : '') . '">';
 
             $renderLabel = $element->getOption('render_label');
             if ($renderLabel !== false) {
@@ -60,12 +59,12 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
                 $class = $element->getType() == 'checkbox' ? 'col-sm-offset-3 col-sm-9' : 'col-sm-9';
             }
 
-            $return .= '<div class="'.$class.'">';
+            $return .= '<div class="' . $class . '">';
             $return .= $this->renderElement($element);
 
             $helpBlock = $element->getOption('form-help');
             if ($helpBlock) {
-                $return .= '<span class="help-block">'.$helpBlock.'</span>';
+                $return .= '<span class="help-block">' . $helpBlock . '</span>';
             }
 
             $return .= $element->renderErrors();
@@ -91,8 +90,8 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
             $error = $element->isError();
         }
 
-        $return = '<label class="control-label'.($this->getForm()->hasClass('form-horizontal') ? ' col-sm-3' : '').($error ? ' error' : '').'">';
-        $return .= $label.':';
+        $return = '<label class="control-label' . ($this->getForm()->hasClass('form-horizontal') ? ' col-sm-3' : '') . ($error ? ' error' : '') . '">';
+        $return .= $label . ':';
 
         if ($required) {
             $return .= '<span class="required">*</span>';
@@ -124,9 +123,9 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
 
         if ($buttons) {
             $return .= '<div class="form-group">
-                            <div class="'.($this->getForm()->hasClass('form-horizontal') ? 'col-sm-offset-3 col-sm-9' : '').'">';
+                            <div class="' . ($this->getForm()->hasClass('form-horizontal') ? 'col-sm-offset-3 col-sm-9' : '') . '">';
             foreach ($buttons as $button) {
-                $return .= $button->render()."\n";
+                $return .= $button->render() . "\n";
             }
             $return .= '</div>';
             $return .= '</div>';

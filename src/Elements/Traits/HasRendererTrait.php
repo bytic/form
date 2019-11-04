@@ -68,4 +68,12 @@ trait HasRendererTrait
     {
         return $this->getRenderer()->renderErrors($this);
     }
+
+    /**
+     * @return mixed
+     */
+    public function renderLabel()
+    {
+        return $this->getRenderer()->renderLabel($this);
+    }
 }
