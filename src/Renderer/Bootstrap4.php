@@ -20,8 +20,7 @@ class Nip_Form_Renderer_Bootstrap4 extends Nip_Form_Renderer_Bootstrap
 
             $return .= '<div class="form-group row-'.$element->getUniqueId().($element->isError() ? ' has-error' : '').'">';
 
-            $renderLabel = $element->getOption('render_label');
-            if ($renderLabel !== false) {
+            if ($element->isRenderLabel()) {
                 $return .= $this->renderLabel($element);
             }
 

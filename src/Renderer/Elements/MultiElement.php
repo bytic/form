@@ -17,8 +17,7 @@ class Nip_Form_Renderer_Elements_MultiElement extends AbstractElement
         $returnElements = [];
         foreach ($elements as $element) {
             $element->addClass('form-control');
-            $renderLabel = $element->getOption('render_label');
-            if ($renderLabel !== false) {
+            if ($element->isRenderLabel()) {
                 $return .= $this->renderLabel($element);
             }
             $returnElements[] = $element->render();

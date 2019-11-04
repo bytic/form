@@ -76,4 +76,20 @@ trait HasRendererTrait
     {
         return $this->getRenderer()->renderLabel($this);
     }
+
+    /**
+     * @param bool $value
+     */
+    public function setRenderLabel(bool $value)
+    {
+        $this->setOption('render_label', $value);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRenderLabel()
+    {
+        return $this->getOption('render_label') !== false;
+    }
 }

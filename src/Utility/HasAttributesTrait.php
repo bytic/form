@@ -179,7 +179,7 @@ trait HasAttributesTrait
     }
 
     /**
-     * @param  array $attribs
+     * @param array $attribs
      * @return static
      */
     public function setAttribs(array $attribs)
@@ -200,7 +200,7 @@ trait HasAttributesTrait
     }
 
     /**
-     * @param  array $attribs
+     * @param array $attribs
      * @return static
      */
     public function addAttribs(array $attribs)
