@@ -1,19 +1,24 @@
 <?php
 
-class Nip_Form_Element_MultiElement extends Nip_Form_Element_Abstract
+use Nip\Form\Elements\AbstractElement;
+
+/**
+ * Class Nip_Form_Element_MultiElement
+ */
+class Nip_Form_Element_MultiElement extends AbstractElement
 {
     protected $_type = 'multiElement';
 
     /**
-     * @var Nip_Form_Element_Abstract[]
+     * @var AbstractElement[]
      */
     protected $elements = [];
 
     /**
-     * @param Nip_Form_Element_Abstract $element
+     * @param AbstractElement $element
      * @return $this
      */
-    public function addElement(Nip_Form_Element_Abstract $element)
+    public function addElement(AbstractElement $element)
     {
         $key = $element->getName();
         $this->elements[$key] = $element;
