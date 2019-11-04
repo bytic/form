@@ -13,7 +13,7 @@ use Nip\Form\Traits\MessagesTrait;
 use Nip\Form\Traits\NewElementsMethods;
 use Nip\View;
 use Nip\Form\Buttons\AbstractButton as ButtonAbstract;
-use Nip_Form_Element_Abstract as ElementAbstract;
+use Nip\Form\Elements\AbstractElement as ElementAbstract;
 
 /**
  * Class AbstractForm

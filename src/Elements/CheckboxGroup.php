@@ -56,7 +56,7 @@ class Nip_Form_Element_CheckboxGroup extends Nip_Form_Element_Input_Group
     }
 
     /**
-     * @return Nip_Form_Element_Abstract
+     * @return Nip\Form\Elements\AbstractElement
      */
     public function getNewElement()
     {

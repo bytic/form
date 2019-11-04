@@ -36,7 +36,7 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
     }
 
     /**
-     * @param Nip_Form_Element_Abstract $element
+     * @param Nip\Form\Elements\AbstractElement $element
      * @return string
      */
     public function renderRow($element)
@@ -50,7 +50,7 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
             $return .= '<div class="form-group row-' . $element->getUniqueId() . ($element->isError() ? ' has-error' : '') . '">';
 
             if ($element->isRenderLabel()) {
-                $return .= $this->renderLabel($element);
+                $return .= $this->renderElementLabel($element);
             }
 
             $class = '';
@@ -58,7 +58,7 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
                 $class = $element->getType() == 'checkbox' ? 'col-sm-offset-3 col-sm-9' : 'col-sm-9';
             }
 
-            $return .= '<div class="' . $class . '">';
+            $return .= $class ? '<div class="' . $class . '">' : '';
             $return .= $this->renderElement($element);
 
             $helpBlock = $element->getOption('form-help');
@@ -67,7 +67,7 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
             }
 
             $return .= $element->renderErrors();
-            $return .= '</div>';
+            $return .= $class ? '</div>' : '';
             $return .= '</div>';
         }
 
@@ -75,30 +75,16 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
     }
 
     /**
-     * @param $label
-     * @param bool $required
-     * @param bool $error
-     * @return string
+     * @inheritDoc
      */
-    public function renderLabel($label, $required = false, $error = false)
+    protected function getLabelClassesForElement($element)
     {
-        if (is_object($label)) {
-            $element = $label;
-            $label = $element->getLabel();
-            $required = $element->isRequired();
-            $error = $element->isError();
+        $classes = parent::getLabelClassesForElement($element);
+        $classes[] = 'control-label';
+        if ($this->getForm()->hasClass('form-horizontal')) {
+            $classes[] = 'col-sm-3';
         }
-
-        $return = '<label class="control-label' . ($this->getForm()->hasClass('form-horizontal') ? ' col-sm-3' : '') . ($error ? ' error' : '') . '">';
-        $return .= $label . ':';
-
-        if ($required) {
-            $return .= '<span class="required">*</span>';
-        }
-
-        $return .= "</label>";
-
-        return $return;
+        return $classes;
     }
 
     /**
@@ -109,7 +95,7 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
     {
         $element->addClass('form-control');
 
-        return $element->renderElement();
+        return parent::renderElement($element);
     }
 
     /**

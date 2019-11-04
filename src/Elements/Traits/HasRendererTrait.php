@@ -2,6 +2,8 @@
 
 namespace Nip\Form\Elements\Traits;
 
+use Nip\Form\Renderer\Elements\AbstractElementRenderer;
+
 /**
  * Trait HasRendererTrait
  * @package Nip\Form\Elements\Traits
@@ -46,7 +48,7 @@ trait HasRendererTrait
     }
 
     /**
-     * @return mixed
+     * @return AbstractElementRenderer
      */
     public function getRenderer()
     {
@@ -58,7 +60,7 @@ trait HasRendererTrait
      */
     public function renderElement()
     {
-        return $this->getRenderer()->renderElement($this);
+        return $this->getRenderer()->renderElement();
     }
 
     /**
@@ -66,15 +68,16 @@ trait HasRendererTrait
      */
     public function renderErrors()
     {
-        return $this->getRenderer()->renderErrors($this);
+        return $this->getRenderer()->renderErrors();
     }
 
     /**
+     * @param null|string|array $extraClasses
      * @return mixed
      */
-    public function renderLabel()
+    public function renderLabel($extraClasses = null)
     {
-        return $this->getRenderer()->renderLabel($this);
+        return $this->getRenderer()->renderLabel($extraClasses);
     }
 
     /**

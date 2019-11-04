@@ -1,6 +1,6 @@
 <?php
 
-class Nip_Form_Element_Select extends Nip_Form_Element_Abstract
+class Nip_Form_Element_Select extends Nip\Form\Elements\AbstractElement
 {
     protected $_type = 'select';
     protected $_optionsElements = [];

@@ -107,7 +107,7 @@ class Nip_Form_Element_Dateselect extends Nip_Form_Element_MultiElement
     /**
      * @param $data
      * @param string $source
-     * @return Nip_Form_Element_Abstract
+     * @return Nip\Form\Elements\AbstractElement
      */
     public function getData($data, $source = 'abstract')
     {

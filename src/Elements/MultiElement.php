@@ -26,7 +26,7 @@ class Nip_Form_Element_MultiElement extends AbstractElement
     }
 
     /**
-     * @return Nip_Form_Element_Abstract[]
+     * @return Nip\Form\Elements\AbstractElement[]
      */
     public function getElements()
     {
@@ -36,7 +36,7 @@ class Nip_Form_Element_MultiElement extends AbstractElement
 
     /**
      * @param $name
-     * @return Nip_Form_Element_Abstract
+     * @return Nip\Form\Elements\AbstractElement
      * @throws \Nip\Logger\Exception
      */
     public function getElement($name)

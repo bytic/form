@@ -41,12 +41,7 @@ abstract class AbstractElementRenderer
     {
         $return = '';
         $return .= $this->renderElement();
-
-        $renderErrors = $this->getElement()->getForm()->getOption('render_input_errors');
-        if ($renderErrors !== false) {
-            $return .= $this->renderErrors();
-        }
-        $this->getElement()->setRendered(true);
+        $return .= $this->renderErrors();
 
         return $return;
     }
@@ -63,13 +58,14 @@ abstract class AbstractElementRenderer
     }
 
     /**
-     * @param $classes
+     * @param string|array $classes
      * @return string
      */
-    public function renderLabel($classes = '')
+    public function renderLabel($classes = null)
     {
         $label = $this->getElement()->getLabel();
         $required = $this->getElement()->isRequired();
+        $classes = is_array($classes) ? implode(' ', $classes) : $classes;
 
         $return = '<label class="' . $classes . '">';
         $return .= $label . ':';

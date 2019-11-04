@@ -2,12 +2,12 @@
 
 namespace Nip\Form\Renderer;
 
+use AbstractElement as AbstractElementRenderer;
 use Nip\Form\AbstractForm;
+use Nip\Form\Elements\AbstractElement;
 use Nip\Form\Renderer\Traits\HasButtonRendererTrait;
 use Nip\Helpers\View\Errors as ErrorsHelper;
 use Nip\Helpers\View\Messages as MessagesHelper;
-use Nip\Form\Elements\AbstractElement;
-use AbstractElement as AbstractElementRenderer;
 
 /**
  * Class AbstractRenderer
@@ -165,19 +165,24 @@ abstract class AbstractRenderer
     /**
      * @return string
      */
-    public function renderElements()
-    {
-        return '';
-    }
+    abstract public function renderElements();
 
     /**
      * @return string
      */
     public function closeTag()
     {
-        $return = '</form>';
+        return '</form>';
+    }
 
-        return $return;
+    /**
+     * @param AbstractElement $element
+     * @return mixed
+     */
+    public function renderElementLabel(AbstractElement $element)
+    {
+        $extraClasses = $this->getLabelClassesForElement($element);
+        return $element->renderLabel($extraClasses);
     }
 
     /**
@@ -185,14 +190,12 @@ abstract class AbstractRenderer
      * @param bool $required
      * @param bool $error
      * @return string
+     * @deprecated Use renderElementLabel()
      */
     public function renderLabel($label, $required = false, $error = false)
     {
         if (is_object($label)) {
-            $element = $label;
-            $label = $element->getLabel();
-            $required = $element->isRequired();
-            $error = $element->isError();
+            return $this->renderElementLabel($label);
         }
 
         $return = '<label class="col-sm-3 ' . ($error ? ' error' : '') . '">';
@@ -205,6 +208,19 @@ abstract class AbstractRenderer
         $return .= "</label>";
 
         return $return;
+    }
+
+    /**
+     * @param string|AbstractElement $element
+     * @return array
+     */
+    protected function getLabelClassesForElement($element)
+    {
+        $classes = [];
+        if (is_object($element) && $element->isError()) {
+            $classes[] = 'error';
+        }
+        return $classes;
     }
 
     /**

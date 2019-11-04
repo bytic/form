@@ -7,68 +7,14 @@ class Nip_Form_Renderer_Bootstrap4 extends Nip_Form_Renderer_Bootstrap
 {
 
     /**
-     * @param Nip_Form_Element_Abstract $element
-     * @return string
+     * @inheritDoc
      */
-    public function renderRow($element)
+    protected function getLabelClassesForElement($element)
     {
-        $return = '';
-        if (!$element->isRendered()) {
-            if ($element->hasCustomRenderer()) {
-                return $element->render();
-            }
+        $classes = parent::getLabelClassesForElement($element);
+        $key = array_search('control-label', $classes);
+        $classes[$key] = 'col-form-label';
 
-            $return .= '<div class="form-group row-'.$element->getUniqueId().($element->isError() ? ' has-error' : '').'">';
-
-            if ($element->isRenderLabel()) {
-                $return .= $this->renderLabel($element);
-            }
-
-            $class = '';
-            if ($this->getForm()->hasClass('form-horizontal')) {
-                $class = $element->getType() == 'checkbox' ? 'col-sm-offset-3 col-sm-9' : 'col-sm-9';
-            }
-
-            $return .= $class ? '<div class="'.$class.'">' : '';
-            $return .= $this->renderElement($element);
-
-            $helpBlock = $element->getOption('form-help');
-            if ($helpBlock) {
-                $return .= '<span class="help-block">'.$helpBlock.'</span>';
-            }
-
-            $return .= $element->renderErrors();
-            $return .= $class ? '</div>' : '';
-            $return .= '</div>';
-        }
-
-        return $return;
-    }
-
-    /**
-     * @param $label
-     * @param bool $required
-     * @param bool $error
-     * @return string
-     */
-    public function renderLabel($label, $required = false, $error = false)
-    {
-        if (is_object($label)) {
-            $element = $label;
-            $label = $element->getLabel();
-            $required = $element->isRequired();
-            $error = $element->isError();
-        }
-
-        $return = '<label class="col-form-label '.($this->getForm()->hasClass('form-horizontal') ? ' col-sm-3' : '').($error ? ' error' : '').'">';
-        $return .= $label.':';
-
-        if ($required) {
-            $return .= '<span class="required">*</span>';
-        }
-
-        $return .= "</label>";
-
-        return $return;
+        return $classes;
     }
 }
