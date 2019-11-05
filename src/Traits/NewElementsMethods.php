@@ -2,7 +2,7 @@
 
 namespace Nip\Form\Traits;
 
-use Nip_Form_Element_Abstract as ElementAbstract;
+use Nip\Form\Elements\AbstractElement as ElementAbstract;
 
 /**
  * Class NewElementsMethods

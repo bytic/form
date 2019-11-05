@@ -68,7 +68,7 @@ abstract class AbstractElement implements ElementInterface
     /**
      * @param $data
      * @param string $source
-     * @return Nip_Form_Element_Abstract
+     * @return \Nip\Form\Elements\AbstractElement
      */
     public function getData($data, $source = 'abstract')
     {

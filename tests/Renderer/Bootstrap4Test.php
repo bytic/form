@@ -19,7 +19,7 @@ class Bootstrap4Test extends AbstractTest
 
         self::assertSame(
             '<div class="form-group row-test_input">'
-            .'<label class="col-form-label ">Test_input:</label>'
+            .'<label class="col-form-label">Test_input:</label>'
             .'<input  type="text" name="test_input" class="form-control " title="Test_input" />'
             .'</div>',
             $form->getRenderer()->renderRow($form->getElement('test_input'))

@@ -5,7 +5,7 @@ class Nip_Form_Element_RadioGroup extends Nip_Form_Element_Input_Group
     protected $_type = 'radioGroup';
 
     /**
-     * @return Nip_Form_Element_Abstract
+     * @return Nip\Form\Elements\AbstractElement
      */
     public function getNewElement()
     {
