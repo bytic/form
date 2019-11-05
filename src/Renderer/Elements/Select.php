@@ -1,6 +1,9 @@
 <?php
-class Nip_Form_Renderer_Elements_Select extends AbstractElement
+class Nip_Form_Renderer_Elements_Select extends \Nip\Form\Renderer\Elements\AbstractElementRenderer
 {
+    /**
+     * @return string
+     */
     public function generateElement()
     {
         $return = '<select ';
