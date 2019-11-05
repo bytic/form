@@ -3,12 +3,13 @@
 namespace Nip\Form\Tests\Renderer\Elements;
 
 use Nip\Form\Tests\AbstractTest;
+use Nip_Form_Renderer_Elements_MultiElement as MultiElementRenderer;
 
 /**
- * Class RadioGroupTest
+ * Class MultiElementTest
  * @package Nip\Form\Tests\Renderer\Elements
  */
-class RadioGroupTest extends AbstractTest
+class MultiElementTest extends AbstractTest
 {
     public function testRenderEmptyElement()
     {
@@ -21,60 +22,32 @@ class RadioGroupTest extends AbstractTest
     public function testRenderSimpleElement()
     {
         $renderer = $this->generateTestRenderer();
-        $renderer->getElement()->addOption('123', 'Age');
-        $renderer->getElement()->addOption('789', 'Height');
+        $form = $renderer->getElement()->getForm();
+
+        $subInput = $form->getNewElement('input');
+        $subInput->setName('sub-input');
+        $renderer->getElement()->addElement($subInput);
+
         $html = $renderer->render();
 
         self::assertSame(
-            '<div class="form-check">'
-            .'<label class="form-check-label">'
-            .'<input  type="radio" name="" value="123" checked="checked" class="form-check-input " title="Age" />'
-            .'Age'
-            .'</label>'
-            .'</div><br />'
-            .'<div class="form-check">'
-            .'<label class="form-check-label">'
-            .'<input  type="radio" name="" value="789" class="form-check-input " title="Height" />'
-            .'Height'
-            .'</label>'
-            .'</div>',
+            '<label class="">:</label>'
+            . '<input  type="text" name="sub-input" class="form-control " title="" />',
             $html
         );
-    }
-
-    public function testRenderAutoSelectFirstFalse()
-    {
-        $renderer = $this->generateTestRenderer();
-        $renderer->getElement()->autoSelectFirst(false);
-        $renderer->getElement()->addOption('123', 'Age');
-        $renderer->getElement()->addOption('789', 'Height');
-        $html = $renderer->render();
-
-        self::assertSame(
-            '<div class="form-check">'
-            .'<label class="form-check-label">'
-            .'<input  type="radio" name="" value="123" class="form-check-input " title="Age" />'
-            .'Age'
-            .'</label>'
-            .'</div><br />'
-            .'<div class="form-check">'
-            .'<label class="form-check-label">'
-            .'<input  type="radio" name="" value="789" class="form-check-input " title="Height" />'
-            .'Height'
-            .'</label>'
-            .'</div>',
-            $html
-        );
-        self::assertSame(null, $renderer->getElement()->getValue());
     }
 
     /**
-     * @return \Nip_Form_Renderer_Elements_RadioGroup
+     * @return MultiElementRenderer
      */
     protected function generateTestRenderer()
     {
-        $input = new \Nip_Form_Element_RadioGroup(new \Nip\Form\Form());
-        $render = new \Nip_Form_Renderer_Elements_RadioGroup();
+        $form = new \Nip\Form\Form();
+        $input = new \Nip_Form_Element_MultiElement($form);
+        $input->setName('multi');
+        $input->setLabel('Multi element');
+
+        $render = new MultiElementRenderer();
         $render->setElement($input);
 
         return $render;
