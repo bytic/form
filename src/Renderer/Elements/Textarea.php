@@ -1,5 +1,5 @@
 <?php
-class Nip_Form_Renderer_Elements_Textarea extends AbstractElement
+class Nip_Form_Renderer_Elements_Textarea extends \Nip\Form\Renderer\Elements\AbstractElementRenderer
 {
     public function generateElement()
     {
