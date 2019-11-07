@@ -31,8 +31,10 @@ class MultiElementTest extends AbstractTest
         $html = $renderer->render();
 
         self::assertSame(
-            '<label class="">:</label>'
-            . '<input  type="text" name="sub-input" class="form-control " title="" />',
+            '<div style="display: flex;flex-direction: row;"><div style="display: flex;flex-direction: column;flex-basis: 100%;flex: 1;padding-right: 20px;">'
+            .'<label class="">:</label>'
+            . '<input  type="text" name="sub-input" class="form-control " title="" />'
+            . '</div></div>',
             $html
         );
     }

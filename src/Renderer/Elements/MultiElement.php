@@ -19,13 +19,18 @@ class Nip_Form_Renderer_Elements_MultiElement extends AbstractElementRenderer
         $returnElements = [];
         foreach ($elements as $element) {
             $element->addClass('form-control');
+            $elementHtml = '<div style="display: flex;flex-direction: column;flex-basis: 100%;flex: 1;padding-right: 20px;">';
             if ($element->isRenderLabel()) {
-                $return .= $element->renderLabel();
+                $elementHtml .= $element->renderLabel();
             }
-            $returnElements[] = $element->render();
+            $elementHtml .= $element->render();
+            $elementHtml .= '</div>';
+            $returnElements[] = $elementHtml;
         }
 
-        $return .= implode(' ', $returnElements);
+        $return .= count($returnElements) ? '<div style="display: flex;flex-direction: row;">' : '';
+        $return .= implode('', $returnElements);
+        $return .= count($returnElements) ? '</div>' : '';
 
         return $return;
     }

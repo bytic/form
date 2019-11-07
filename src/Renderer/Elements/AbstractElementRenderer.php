@@ -100,7 +100,7 @@ abstract class AbstractElementRenderer
     }
 
     /**
-     * @return Nip_Form_Element_Abstract
+     * @return AbstractElement
      */
     public function getElement()
     {
