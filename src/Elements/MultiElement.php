@@ -57,7 +57,7 @@ class Nip_Form_Element_MultiElement extends AbstractElement
             $elements = $this->getElements();
             foreach ($elements as $key => $element) {
                 $value = isset($request[$key]) ? $request[$key] : null;
-                if ($value) {
+                if ($value !== null) {
                     $element->setValue($value);
                 }
             }
