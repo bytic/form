@@ -2,9 +2,10 @@
 
 namespace Nip\Form\Renderer;
 
-use AbstractElement as AbstractElementRenderer;
+use Nip\Form\Renderer\Elements\AbstractElementRenderer as AbstractElementRenderer;
 use Nip\Form\AbstractForm;
 use Nip\Form\Elements\AbstractElement;
+use Nip\Form\Renderer\Traits\ClassesDictionary;
 use Nip\Form\Renderer\Traits\HasButtonRendererTrait;
 use Nip\Helpers\View\Errors as ErrorsHelper;
 use Nip\Helpers\View\Messages as MessagesHelper;
@@ -16,10 +17,10 @@ use Nip\Helpers\View\Messages as MessagesHelper;
 abstract class AbstractRenderer
 {
     use HasButtonRendererTrait;
+    use ClassesDictionary;
 
     protected $form;
 
-    protected $elements;
     protected $elementsRenderer;
 
     /**
@@ -27,26 +28,6 @@ abstract class AbstractRenderer
      */
     public function __construct()
     {
-    }
-
-    /**
-     * @return array
-     */
-    public function getElements()
-    {
-        if (!$this->elements) {
-            $this->elements = $this->getForm()->getElements();
-        }
-
-        return $this->elements;
-    }
-
-    /**
-     * @param $elements
-     */
-    public function setElements($elements)
-    {
-        $this->elements = $elements;
     }
 
     /**

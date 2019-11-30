@@ -5,6 +5,7 @@ namespace Nip\Form\Elements;
 use Nip\Form\AbstractForm;
 use Nip\Form\Elements\Traits\HasAttributesTrait;
 use Nip\Form\Elements\Traits\HasDecoratorsTrait;
+use Nip\Form\Elements\Traits\HasErrorsTrait;
 use Nip\Form\Elements\Traits\HasOptionsTrait;
 use Nip\Form\Elements\Traits\HasRendererTrait;
 use Nip\Form\Elements\Traits\HasTypeTrait;
@@ -22,11 +23,11 @@ abstract class AbstractElement implements ElementInterface
     use HasDecoratorsTrait;
     use HasRendererTrait;
     use HasTypeTrait;
+    use HasErrorsTrait;
 
     protected $_form;
 
     protected $_isRequired;
-    protected $_errors = [];
     protected $_policies;
 
     /**
@@ -134,33 +135,6 @@ abstract class AbstractElement implements ElementInterface
     public function isRequired()
     {
         return (bool)$this->_isRequired;
-    }
-
-    /**
-     * @param $message
-     * @return $this
-     */
-    public function addError($message)
-    {
-        $this->_errors[] = $message;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getErrors()
-    {
-        return $this->_errors;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isError()
-    {
-        return count($this->_errors) > 0;
     }
 
     /**
