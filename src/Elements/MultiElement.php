@@ -15,6 +15,16 @@ class Nip_Form_Element_MultiElement extends AbstractElement
     protected $elements = [];
 
     /**
+     * @inheritdoc
+     */
+    public function setName($name)
+    {
+        $return = parent::setName($name);
+        $this->updateElementNames();
+        return $return;
+    }
+
+    /**
      * @param AbstractElement $element
      * @return $this
      */
@@ -22,6 +32,36 @@ class Nip_Form_Element_MultiElement extends AbstractElement
     {
         $key = $element->getName();
         $this->elements[$key] = $element;
+
+        $inputName = $this->getName();
+        $element->setName($inputName.'['.$key.']');
+        return $this;
+    }
+
+    protected function updateElementNames()
+    {
+        $inputName = $this->getName();
+        $elements = $this->getElements();
+        foreach ($elements as $key => $element) {
+            $element->setName($inputName.'['.$key.']');
+        }
+    }
+
+    /** @noinspection PhpMissingParentCallCommonInspection
+     * @param $request
+     * @return $this
+     */
+    public function getDataFromRequest($request)
+    {
+        if (is_array($request)) {
+            $elements = $this->getElements();
+            foreach ($elements as $key => $element) {
+                $value = isset($request[$key]) ? $request[$key] : null;
+                if ($value !== null) {
+                    $element->setValue($value);
+                }
+            }
+        }
         return $this;
     }
 

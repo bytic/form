@@ -4,6 +4,7 @@ namespace Nip\Form\Renderer\Elements;
 
 use Nip\Form\Elements\AbstractElement;
 use Nip\Form\Renderer\AbstractRenderer;
+use Nip\Form\Renderer\Elements\Traits\CanRenderErrors;
 
 /**
  * Class AbstractElementRenderer
@@ -11,6 +12,8 @@ use Nip\Form\Renderer\AbstractRenderer;
  */
 abstract class AbstractElementRenderer
 {
+    use CanRenderErrors;
+
     protected $_renderer;
     protected $_element;
 
@@ -51,10 +54,19 @@ abstract class AbstractElementRenderer
      */
     public function renderElement()
     {
+        $this->renderElementBefore();
         $return = $this->renderDecorators($this->generateElement(), 'element');
         $this->getElement()->setRendered(true);
 
         return $return;
+    }
+
+    protected function renderElementBefore()
+    {
+        if ($this->getElement()->isError()) {
+            $formRenderer = $this->getElement()->getForm()->getRenderer();
+            $this->getElement()->addClass($formRenderer->classForElementHasError());
+        }
     }
 
     /**
@@ -100,7 +112,7 @@ abstract class AbstractElementRenderer
     }
 
     /**
-     * @return Nip_Form_Element_Abstract
+     * @return AbstractElement
      */
     public function getElement()
     {
@@ -121,20 +133,6 @@ abstract class AbstractElementRenderer
 
     abstract public function generateElement();
 
-    /**
-     * @return string
-     */
-    public function renderErrors()
-    {
-        $return = '';
-        if ($this->getElement()->isError() && $this->getElement()->getForm()->getOption('renderElementErrors') !== false) {
-            $errors = $this->getElement()->getErrors();
-            $errors_string = implode('<br />', $errors);
-            $return .= '<span class="help-inline">' . $errors_string . '</span>';
-        }
-
-        return $return;
-    }
 
     /**
      * @param array $overrides

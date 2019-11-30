@@ -16,7 +16,7 @@ class MultiElementTest extends AbstractTest
         $input = new \Nip_Form_Element_MultiElement($form);
 
         $subInput = $form->getNewElement('input');
-        $input->addElement($input);
+        $input->addElement($subInput);
 
         self::assertCount(1, $input->getElements());
     }
