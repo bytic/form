@@ -107,7 +107,7 @@ abstract class AbstractRenderer
      */
     public function renderElement(AbstractElement $element)
     {
-        return $element->render();
+        return $element->renderElement();
     }
 
     /**
