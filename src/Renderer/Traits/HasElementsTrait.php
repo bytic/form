@@ -8,14 +8,14 @@ namespace Nip\Form\Renderer\Traits;
  */
 trait HasElementsTrait
 {
-    protected $elements;
+    protected $elements = null;
 
     /**
      * @return array
      */
     public function getElements()
     {
-        if (!$this->elements) {
+        if ($this->elements === null) {
             $this->elements = $this->getForm()->getElements();
         }
 

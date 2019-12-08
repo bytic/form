@@ -2,6 +2,9 @@
 
 class Nip_Form_Renderer_Basic extends Nip_Form_Renderer_Table
 {
+    /**
+     * @inheritDoc
+     */
     public function renderElements()
     {
         $elements = $this->getElements();
