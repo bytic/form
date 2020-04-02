@@ -43,11 +43,10 @@ class Nip_Form_Element_Dateselect extends Nip_Form_Element_MultiElement
 
         if (!$this->hasElement('year')) {
             $yearElement = $this->getForm()->getNewElement('select');
-            $currentYear = date('Y');
-            $startYear = $currentYear - 100;
-            $endYear = $currentYear + 5;
-            for ($i = $startYear; $i <= $endYear; $i++) {
-                $yearElement->addOption($i, $i);
+            $years = $this->getOption('years', range((int)date('Y') - 100, date('Y') + 5));
+
+            foreach ($years as $year) {
+                $yearElement->addOption($year, $year);
             }
             $yearElement->setValue(date('Y'));
             $this->elements['year'] = $yearElement;

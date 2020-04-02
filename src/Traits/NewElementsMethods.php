@@ -23,15 +23,18 @@ trait NewElementsMethods
      * @param bool $label
      * @param string $type
      * @param bool $isRequired
+     * @param array $options
      * @return $this
      */
-    public function add($name, $label = false, $type = 'input', $isRequired = false)
+    public function add($name, $label = false, $type = 'input', $isRequired = false, $options = [])
     {
         $label = ($label) ? $label : ucfirst($name);
-        $element = $this->getNewElement($type)
-            ->setName($name)
-            ->setLabel($label)
-            ->setRequired($isRequired);
+        $element = $this->getNewElement($type);
+        $element->setName($name);
+        $element->setLabel($label);
+        $element->setRequired($isRequired);
+        $element->setOptions($options);
+
         $this->addElement($element);
 
         return $this;
@@ -42,15 +45,18 @@ trait NewElementsMethods
      * @param $name
      * @param bool $label
      * @param bool $isRequired
+     * @param array $options
      * @return $this
      */
-    public function addCustom($className, $name, $label = false, $isRequired = false)
+    public function addCustom($className, $name, $label = false, $isRequired = false, $options = [])
     {
         $label = ($label) ? $label : ucfirst($name);
-        $element = $this->getNewElementByClass($className)
-            ->setName($name)
-            ->setLabel($label)
-            ->setRequired($isRequired);
+        $element = $this->getNewElementByClass($className);
+        $element->setName($name);
+        $element->setLabel($label);
+        $element->setRequired($isRequired);
+        $element->setOptions($options);
+        
         $this->addElement($element);
 
         return $this;
