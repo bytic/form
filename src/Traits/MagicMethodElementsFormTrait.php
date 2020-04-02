@@ -125,8 +125,9 @@ trait MagicMethodElementsFormTrait
         $name = $this->getElementNameFromMagicMethodArguments($arguments);
         $label = $this->getElementLabelFromMagicMethodArguments($arguments);
         $isRequired = $this->getElementIsRequiredFromMagicMethodArguments($arguments);
+        $options = $this->getElementOptionsFromMagicMethodArguments($arguments);
 
-        return $this->add($name, $label, $type, $isRequired);
+        return $this->add($name, $label, $type, $isRequired, $options);
     }
 
     /**
@@ -154,5 +155,14 @@ trait MagicMethodElementsFormTrait
     protected function getElementIsRequiredFromMagicMethodArguments($arguments)
     {
         return isset($arguments[2]) ? $arguments[2] : false;
+    }
+
+    /**
+     * @param $arguments
+     * @return string|false
+     */
+    protected function getElementOptionsFromMagicMethodArguments($arguments)
+    {
+        return isset($arguments[3]) ? $arguments[3] : false;
     }
 }

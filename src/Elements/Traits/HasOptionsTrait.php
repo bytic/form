@@ -11,6 +11,22 @@ trait HasOptionsTrait
     protected $_options;
 
     /**
+     * @return mixed
+     */
+    public function getOptions()
+    {
+        return $this->_options;
+    }
+
+    /**
+     * @param mixed $options
+     */
+    public function setOptions($options)
+    {
+        $this->_options = $options;
+    }
+
+    /**
      * @param $key
      * @param $value
      * @return $this
@@ -36,13 +52,14 @@ trait HasOptionsTrait
 
     /**
      * @param string $key
+     * @param null $default
      * @return null
      */
-    public function getOption($key)
+    public function getOption($key, $default = null)
     {
         $key = (string)$key;
         if (!$this->hasOption($key)) {
-            return null;
+            return $default;
         }
 
         return $this->_options[$key];
