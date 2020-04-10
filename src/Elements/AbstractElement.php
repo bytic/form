@@ -144,4 +144,12 @@ abstract class AbstractElement implements ElementInterface
     {
         return false;
     }
+
+    /**
+     * @return bool
+     */
+    public function isRequestArray()
+    {
+        return false;
+    }
 }

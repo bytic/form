@@ -20,14 +20,6 @@ abstract class Nip_Form_Element_Input_Group extends AbstractElement
     }
 
     /**
-     * @return bool
-     */
-    public function isRequestArray()
-    {
-        return false;
-    }
-
-    /**
      * @param $options
      * @param $valueKey
      * @param $labelKey

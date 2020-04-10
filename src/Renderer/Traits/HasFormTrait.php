@@ -3,7 +3,7 @@
 namespace Nip\Form\Renderer\Traits;
 
 use Nip\Form\AbstractForm;
-use Nip\Form\Renderer\AbstractRenderer;
+use Nip\Form\Traits\HasRendererTrait;
 
 /**
  * Trait HasFormTrait
@@ -22,7 +22,7 @@ trait HasFormTrait
     }
 
     /**
-     * @param AbstractForm $form
+     * @param AbstractForm|HasRendererTrait $form
      * @return $this
      */
     public function setForm(AbstractForm $form)
