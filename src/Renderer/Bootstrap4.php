@@ -17,7 +17,12 @@ class Nip_Form_Renderer_Bootstrap4 extends Nip_Form_Renderer_Bootstrap
                 return $element->render();
             }
 
-            $return .= '<div class="form-group row row-'.$element->getUniqueId().($element->isError() ? ' has-error' : '').'">';
+            $formType = $this->getForm()->hasClass('form-horizontal') ? 'form-horizontal' : '';
+
+            $rowClass = $formType == 'form-horizontal' ? 'form-group row' : 'form-group';
+            $rowClass .= ' row-' . $element->getUniqueId();
+            $rowClass .= $element->isError() ? ' has-error' : '';
+            $return .= '<div class="' . $rowClass . '">';
 
             $renderLabel = $element->getOption('render_label');
             if ($renderLabel !== false) {
@@ -25,7 +30,7 @@ class Nip_Form_Renderer_Bootstrap4 extends Nip_Form_Renderer_Bootstrap
             }
 
             $class = '';
-            if ($this->getForm()->hasClass('form-horizontal')) {
+            if ($formType == 'form-horizontal') {
                 $class = $element->getType() == 'checkbox' ? 'col-sm-offset-3 col-sm-9' : 'col-sm-9';
             }
 
