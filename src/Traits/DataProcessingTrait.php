@@ -22,7 +22,7 @@ trait DataProcessingTrait
                     $data = is_array($request[$name]) ? $request[$name] : [$request[$name]];
                     $element->getData($data, 'request');
                 } else {
-                    $value = $request[$name];
+                    $value = isset($request[$name]) ? $request[$name] : null;
                     if (strpos($name, '[') && strpos($name, ']')) {
                         $arrayPrimary = substr($name, 0, strpos($name, '['));
                         $arrayKeys = str_replace($arrayPrimary, '', $name);
