@@ -1,4 +1,5 @@
 <?php
+
 class Nip_Form_Renderer_Button_Input extends Nip_Form_Renderer_Button_Abstract
 {
     public function generateItem()
@@ -8,9 +9,12 @@ class Nip_Form_Renderer_Button_Input extends Nip_Form_Renderer_Button_Abstract
         return $return;
     }
 
-    public function getItemAttribs()
+    /**
+     * @inheritDoc
+     */
+    public function getAllowedAttributes()
     {
-        $attribs = parent::getItemAttribs();
+        $attribs = parent::getAllowedAttributes();
         $attribs[] = 'type';
         $attribs[] = 'value';
         return $attribs;

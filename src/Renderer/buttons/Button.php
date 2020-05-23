@@ -8,17 +8,17 @@ class Nip_Form_Renderer_Button_Button extends Nip_Form_Renderer_Button_Abstract
      */
     public function generateItem()
     {
-        return '<button '.$this->renderAttributes().'>
-                '.$this->getItem()->getLabel().'
-            </button>';
+        return '<button ' . $this->renderAttributes() . '>'
+            . $this->getItem()->getLabel()
+            . '</button>';
     }
 
     /**
      * @inheritDoc
      */
-    public function getItemAttribs()
+    public function getAllowedAttributes()
     {
-        $attribs = parent::getItemAttribs();
+        $attribs = parent::getAllowedAttributes();
         $attribs[] = 'type';
 
         return $attribs;

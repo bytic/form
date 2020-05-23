@@ -8,8 +8,9 @@ use Nip\Form\Buttons\AbstractButton;
  */
 abstract class Nip_Form_Renderer_Button_Abstract
 {
-    protected $_renderer;
+    use \Nip\Form\Renderer\Traits\HasAttribsTrait;
 
+    protected $_renderer;
     protected $_button;
 
     /**
@@ -50,6 +51,14 @@ abstract class Nip_Form_Renderer_Button_Abstract
         return $this->_item;
     }
 
+    /**
+     * @return AbstractButton
+     */
+    public function getElement()
+    {
+        return $this->getItem();
+    }
+
 
     public function render()
     {
@@ -71,32 +80,5 @@ abstract class Nip_Form_Renderer_Button_Abstract
         return;
     }
 
-    public function renderAttributes($overrides = [])
-    {
-        $attribs = $this->getItem()->getAttribs();
-        if (!isset($attribs['title'])) {
-            $attribs['title'] = $this->getItem()->getLabel();
-        }
-        $itemAttribs = $this->getItemAttribs();
-        $return = '';
-        foreach ($attribs as $name => $value) {
-            if (in_array($name, $itemAttribs)) {
-                if (in_array($name, array_keys($overrides))) {
-                    $value = $overrides[$name];
-                }
 
-                $return .= ' '.$name.'="'.$value.'"';
-            }
-        }
-
-        return $return;
-    }
-
-    /**
-     * @return array
-     */
-    public function getItemAttribs()
-    {
-        return ['id', 'name', 'style', 'class', 'title', 'read_only', 'disabled'];
-    }
 }
