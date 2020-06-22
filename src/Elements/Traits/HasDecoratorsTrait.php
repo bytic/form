@@ -59,7 +59,7 @@ trait HasDecoratorsTrait
      */
     public function getDecoratorsByPosition($position)
     {
-        return $this->decorators[$position];
+        return isset($this->decorators[$position]) ? $this->decorators[$position] : [];
     }
 
     /**
