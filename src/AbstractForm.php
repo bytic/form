@@ -14,6 +14,7 @@ abstract class AbstractForm
     use Traits\DataProcessingTrait;
     use Traits\HasAttributesTrait;
     use Traits\HasButtonsTrait;
+    use Traits\HasCacheTrait;
     use Traits\HasClassTrait;
     use Traits\HasDisplayGroupsTrait;
     use Traits\HasElementsTrait;
@@ -35,7 +36,6 @@ abstract class AbstractForm
     protected $_options = [];
 
     protected $_decorators = [];
-    protected $_cache;
 
     protected $controllerView = false;
 
@@ -126,34 +126,6 @@ abstract class AbstractForm
         trigger_error('Method is not valid', E_USER_ERROR);
 
         return null;
-    }
-
-
-    /**
-     * @param $key
-     * @return mixed
-     */
-    public function getCache($key)
-    {
-        return $this->_cache[$key];
-    }
-
-    /**
-     * @param string $key
-     * @param $value
-     */
-    public function setCache($key, $value)
-    {
-        $this->_cache[$key] = $value;
-    }
-
-    /**
-     * @param $key
-     * @return bool
-     */
-    public function isCache($key)
-    {
-        return isset($this->_cache[$key]);
     }
 
     /**
