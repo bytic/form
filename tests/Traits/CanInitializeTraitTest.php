@@ -18,7 +18,7 @@ class CanInitializeTraitTest extends AbstractTest
         $form = Mockery::mock(Form::class)->makePartial()->shouldAllowMockingProtectedMethods();
         $form->shouldReceive('initAction')->once();
 
-        $form->init();
-        $form->initialize();
+        $form->initializeIfNotInitialized();
+        $form->initializeIfNotInitialized();
     }
 }

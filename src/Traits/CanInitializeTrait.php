@@ -18,39 +18,51 @@ trait CanInitializeTrait
      */
     protected $initialized = false;
 
+
+    public function initializeIfNotInitialized()
+    {
+        if ($this->initialized !== false) {
+            return;
+        }
+
+        if (method_exists($this, 'init')) {
+            $this->init();
+        } else {
+            $this->initialize();
+        }
+
+        if (method_exists($this, 'postInit')) {
+            $this->postInit();
+        } else {
+            $this->initialized();
+        }
+
+        $this->initialized = true;
+    }
+
     /**
      * @deprecated use initialize()
      */
     public function init()
     {
-        return $this->initialize();
+        $this->initialize();
     }
 
-    /**
-     * @return $this
-     */
     public function initialize()
     {
-        if ($this->initialized()) {
-            return $this;
-        }
-
         $this->initAction();
-        $this->postInit();
-        $this->initialized(true);
-        return $this;
     }
 
     /**
-     * @param null $initialized
-     * @return bool
+     * @deprecated use initialize()
      */
-    protected function initialized($initialized = null): bool
+    public function postInit()
     {
-        if (is_bool($initialized)) {
-            $this->initialized = $initialized;
-        }
-        return $this->initialized;
+        $this->initialized();
+    }
+
+    protected function initialized()
+    {
     }
 
     protected function initAction()
@@ -58,9 +70,5 @@ trait CanInitializeTrait
         if (function_exists('current_url')) {
             $this->setAction(current_url());
         }
-    }
-
-    public function postInit()
-    {
     }
 }

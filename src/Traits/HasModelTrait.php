@@ -15,6 +15,12 @@ trait HasModelTrait
      */
     protected $model;
 
+    public function initialized()
+    {
+        parent::initialized();
+        $this->getDataFromModel();
+    }
+
     /**
      * @param $name
      * @return $this
@@ -49,8 +55,6 @@ trait HasModelTrait
     public function setModel(Record $model)
     {
         $this->model = $model;
-        $this->getDataFromModel();
-
         return $this;
     }
 
