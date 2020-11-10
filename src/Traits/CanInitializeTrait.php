@@ -21,12 +21,15 @@ trait CanInitializeTrait
     /**
      * @deprecated use initialize()
      */
-    public function init(): self
+    public function init()
     {
         return $this->initialize();
     }
 
-    public function initialize(): self
+    /**
+     * @return $this
+     */
+    public function initialize()
     {
         if ($this->initialized()) {
             return $this;
