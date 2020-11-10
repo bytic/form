@@ -14,7 +14,6 @@ trait HasElementsTrait
     protected $_elementsLabel;
     protected $_elementsOrder = [];
 
-
     /**
      * @param AbstractElement $element
      * @return $this

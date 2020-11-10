@@ -9,9 +9,10 @@ use Nip\View;
  * Class AbstractForm
  *
  */
-abstract class AbstractForm
+abstract class AbstractForm implements FormInterface
 {
     use Traits\DataProcessingTrait;
+    use Traits\CanInitializeTrait;
     use Traits\HasAttributesTrait;
     use Traits\HasButtonsTrait;
     use Traits\HasCacheTrait;
@@ -44,33 +45,15 @@ abstract class AbstractForm
      */
     public function __construct()
     {
-        $this->init();
-        $this->postInit();
-    }
-
-    public function init()
-    {
-        $this->initAction();
-    }
-
-    protected function initAction()
-    {
-        if (function_exists('current_url')) {
-            $this->setAction(current_url());
-        }
     }
 
     /**
      * @param string $action
      * @return AbstractForm
      */
-    public function setAction($action)
+    public function setAction(string $action): AbstractForm
     {
         return $this->setAttrib('action', (string)$action);
-    }
-
-    public function postInit()
-    {
     }
 
     /**

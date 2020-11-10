@@ -11,3 +11,10 @@ Form Component
 [![Quality Score](https://img.shields.io/scrutinizer/g/bytic/form.svg?style=flat-square)](https://scrutinizer-ci.com/g/bytic/form)
 [![StyleCI](https://styleci.io/repos/114482771/shield?branch=master)](https://styleci.io/repos/114482771)
 [![Total Downloads](https://img.shields.io/packagist/dt/bytic/form.svg?style=flat-square)](https://packagist.org/packages/bytic/form)
+
+
+# Inspiration
+* https://github.com/symfony/form
+* https://github.com/auraphp/Aura.Input
+* https://github.com/nette/forms
+* https://github.com/laminas/laminas-form

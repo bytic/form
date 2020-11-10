@@ -14,6 +14,8 @@ trait HasExecutionMethodsTrait
      */
     public function execute()
     {
+        $this->initialize();
+
         if ($this->submited()) {
             return $this->processRequest();
         }
@@ -53,6 +55,8 @@ trait HasExecutionMethodsTrait
      */
     public function validate()
     {
+        $this->initialize();
+
         $request = $this->getAttrib('method') == 'post' ? $_POST : $_GET;
         $this->getDataFromRequest($request);
         $this->processValidation();
@@ -80,5 +84,7 @@ trait HasExecutionMethodsTrait
 
     public function process()
     {
+        $this->initialize();
+
     }
 }
