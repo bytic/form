@@ -76,6 +76,7 @@ trait HasRendererTrait
      */
     public function render()
     {
+        $this->initializeIfNotInitialized();
         return $this->getRenderer()->render();
     }
 
