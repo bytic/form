@@ -79,29 +79,4 @@ abstract class Nip_Form_Renderer_Button_Abstract
     {
         return;
     }
-
-<<<<<<< HEAD
-=======
-    public function renderAttributes($overrides = [])
-    {
-        $attribs = $this->getItem()->getAttribs();
-        if (!isset($attribs['title'])) {
-            $attribs['title'] = $this->getItem()->getLabel();
-        }
-        $itemAttribs = $this->getItemAttribs();
-        $return = '';
-        foreach ($attribs as $name => $value) {
-            if (in_array($name, $itemAttribs)) {
-                if (in_array($name, array_keys($overrides))) {
-                    $value = $overrides[$name];
-                }
-
-                $return .= ' ' . $name . '="' . $value . '"';
-            }
-        }
-
-        return $return;
-    }
->>>>>>> 0.9
-
 }
