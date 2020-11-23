@@ -5,7 +5,6 @@ use Nip\Form\Renderer\AbstractRenderer;
 
 class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
 {
-
     /**
      * @return string
      */

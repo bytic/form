@@ -1,4 +1,5 @@
 <?php
+
 class Nip_Form_Element_Radio extends Nip_Form_Element_Input_Abstract
 {
     protected $_type = 'radio';

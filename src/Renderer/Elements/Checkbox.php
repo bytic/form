@@ -11,10 +11,10 @@ class Nip_Form_Renderer_Elements_Checkbox extends Nip_Form_Renderer_Elements_Inp
         $this->getElement()->addClass('form-check-input');
 
         $class = get_class($this->getRenderer()) == Nip_Form_Renderer_Bootstrap::class ? 'checkbox' : 'form-check';
-        $return = '<div class="'.$class.'">';
+        $return = '<div class="' . $class . '">';
         $return .= '<label class="form-check-label">';
         $return .= parent::generateElement();
-        $return .= ' '.$this->getElement()->getLabel();
+        $return .= ' ' . $this->getElement()->getLabel();
         $return .= '</label>';
         $return .= '</div>';
 

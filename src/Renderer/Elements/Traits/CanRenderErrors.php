@@ -8,7 +8,6 @@ namespace Nip\Form\Renderer\Elements\Traits;
  */
 trait CanRenderErrors
 {
-
     /**
      * @return string
      */

@@ -2,7 +2,6 @@
 
 class Nip_Form_Renderer_DisplayGroup
 {
-   
     /**
      * @var Nip_Form_DisplayGroup
      */
@@ -25,7 +24,7 @@ class Nip_Form_Renderer_DisplayGroup
     {
         return $this->_group;
     }
-    
+
     public function render()
     {
         $return = '<fieldset' . $this->renderAttributes() . '>';
@@ -37,7 +36,7 @@ class Nip_Form_Renderer_DisplayGroup
         $return .= '</fieldset>';
         return $return;
     }
-    
+
     public function renderAttributes($overrides = array())
     {
         $attribs = $this->getGroup()->getAttribs();

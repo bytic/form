@@ -10,7 +10,7 @@ class Nip_Form_Renderer_Elements_Radio extends Nip_Form_Renderer_Elements_Input_
         $this->getElement()->addClass('form-check-input');
 
         $class = get_class($this->getRenderer()) == Nip_Form_Renderer_Bootstrap::class ? 'radio' : 'form-check';
-        $return = '<div class="'.$class.'">';
+        $return = '<div class="' . $class . '">';
         $return .= '<label class="form-check-label">';
         $return .= parent::generateElement();
         $return .= $this->getElement()->getLabel();

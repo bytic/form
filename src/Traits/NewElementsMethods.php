@@ -56,7 +56,7 @@ trait NewElementsMethods
         $element->setLabel($label);
         $element->setRequired($isRequired);
         $element->setOptions($options);
-        
+
         $this->addElement($element);
 
         return $this;
@@ -79,7 +79,7 @@ trait NewElementsMethods
      */
     public function getElementClassName($type)
     {
-        return 'Nip_Form_Element_'.ucfirst($type);
+        return 'Nip_Form_Element_' . ucfirst($type);
     }
 
     /**

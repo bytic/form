@@ -34,7 +34,7 @@ class Nip_Form_Element_MultiElement extends AbstractElement
         $this->elements[$key] = $element;
 
         $inputName = $this->getName();
-        $element->setName($inputName.'['.$key.']');
+        $element->setName($inputName . '[' . $key . ']');
         return $this;
     }
 
@@ -43,7 +43,7 @@ class Nip_Form_Element_MultiElement extends AbstractElement
         $inputName = $this->getName();
         $elements = $this->getElements();
         foreach ($elements as $key => $element) {
-            $element->setName($inputName.'['.$key.']');
+            $element->setName($inputName . '[' . $key . ']');
         }
     }
 

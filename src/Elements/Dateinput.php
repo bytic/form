@@ -108,8 +108,8 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
 
                 return true;
             }
-            $message = $this->getForm()->getMessageTemplate('bad-'.$this->getName());
-            $message = $message ? $message : 'I couldn\'t parse the '.strtolower($this->getLabel()).' you entered';
+            $message = $this->getForm()->getMessageTemplate('bad-' . $this->getName());
+            $message = $message ? $message : 'I couldn\'t parse the ' . strtolower($this->getLabel()) . ' you entered';
             $this->addError($message);
         }
     }
