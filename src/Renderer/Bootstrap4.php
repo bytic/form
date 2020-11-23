@@ -34,12 +34,12 @@ class Nip_Form_Renderer_Bootstrap4 extends Nip_Form_Renderer_Bootstrap
                 $class = $element->getType() == 'checkbox' ? 'col-sm-offset-3 col-sm-9' : 'col-sm-9';
             }
 
-            $return .= '<div class="'.$class.'">';
+            $return .= '<div class="' . $class . '">';
             $return .= $this->renderElement($element);
 
             $helpBlock = $element->getOption('form-help');
             if ($helpBlock) {
-                $return .= '<span class="help-block">'.$helpBlock.'</span>';
+                $return .= '<span class="help-block">' . $helpBlock . '</span>';
             }
 
             $return .= $element->renderErrors();
@@ -65,8 +65,8 @@ class Nip_Form_Renderer_Bootstrap4 extends Nip_Form_Renderer_Bootstrap
             $error = $element->isError();
         }
 
-        $return = '<label class="col-form-label '.($this->getForm()->hasClass('form-horizontal') ? ' col-sm-3' : '').($error ? '' : '').'">';
-        $return .= $label.':';
+        $return = '<label class="col-form-label ' . ($this->getForm()->hasClass('form-horizontal') ? ' col-sm-3' : '') . ($error ? '' : '') . '">';
+        $return .= $label . ':';
 
         if ($required) {
             $return .= '<span class="required">*</span>';

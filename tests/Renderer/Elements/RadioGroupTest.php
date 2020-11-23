@@ -27,17 +27,17 @@ class RadioGroupTest extends AbstractTest
 
         self::assertSame(
             '<div class="form-check">'
-            .'<label class="form-check-label">'
-            .'<input  type="radio" name="" value="123" checked="checked" class="form-check-input " title="Age" />'
-            .'Age'
-            .'</label>'
-            .'</div><br />'
-            .'<div class="form-check">'
-            .'<label class="form-check-label">'
-            .'<input  type="radio" name="" value="789" class="form-check-input " title="Height" />'
-            .'Height'
-            .'</label>'
-            .'</div>',
+            . '<label class="form-check-label">'
+            . '<input  type="radio" name="" value="123" checked="checked" class="form-check-input " title="Age" />'
+            . 'Age'
+            . '</label>'
+            . '</div><br />'
+            . '<div class="form-check">'
+            . '<label class="form-check-label">'
+            . '<input  type="radio" name="" value="789" class="form-check-input " title="Height" />'
+            . 'Height'
+            . '</label>'
+            . '</div>',
             $html
         );
     }
@@ -52,17 +52,17 @@ class RadioGroupTest extends AbstractTest
 
         self::assertSame(
             '<div class="form-check">'
-            .'<label class="form-check-label">'
-            .'<input  type="radio" name="" value="123" class="form-check-input " title="Age" />'
-            .'Age'
-            .'</label>'
-            .'</div><br />'
-            .'<div class="form-check">'
-            .'<label class="form-check-label">'
-            .'<input  type="radio" name="" value="789" class="form-check-input " title="Height" />'
-            .'Height'
-            .'</label>'
-            .'</div>',
+            . '<label class="form-check-label">'
+            . '<input  type="radio" name="" value="123" class="form-check-input " title="Age" />'
+            . 'Age'
+            . '</label>'
+            . '</div><br />'
+            . '<div class="form-check">'
+            . '<label class="form-check-label">'
+            . '<input  type="radio" name="" value="789" class="form-check-input " title="Height" />'
+            . 'Height'
+            . '</label>'
+            . '</div>',
             $html
         );
         self::assertSame(null, $renderer->getElement()->getValue());

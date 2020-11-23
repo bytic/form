@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nip\Form\Traits;
-
 
 /**
  * Trait CanInitializeTrait
@@ -10,7 +8,6 @@ namespace Nip\Form\Traits;
  */
 trait CanInitializeTrait
 {
-
     /**
      * Is the form prepared ?
      *

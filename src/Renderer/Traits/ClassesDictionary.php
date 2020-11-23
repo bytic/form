@@ -8,7 +8,6 @@ namespace Nip\Form\Renderer\Traits;
  */
 trait ClassesDictionary
 {
-
     /**
      * @return string
      */

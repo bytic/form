@@ -30,7 +30,7 @@ class DecoratorFactory
      */
     public static function create($type)
     {
-        $name = 'Nip_Form_Decorator_Elements_'.ucfirst($type);
+        $name = 'Nip_Form_Decorator_Elements_' . ucfirst($type);
         $decorator = new $name();
         return $decorator;
     }

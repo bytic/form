@@ -1,4 +1,5 @@
 <?php
+
 class Nip_Form_Renderer_Elements_Select extends \Nip\Form\Renderer\Elements\AbstractElementRenderer
 {
     /**
@@ -36,7 +37,7 @@ class Nip_Form_Renderer_Elements_Select extends \Nip\Form\Renderer\Elements\Abst
                 } elseif ($this->getElement()->getValue() == $value) {
                     $atribs['selected'] = 'selected';
                 }
-                
+
                 foreach ($atribs as $name=>$value) {
                     $return .= ' ' . $name . '="' . $value . '"';
                 }

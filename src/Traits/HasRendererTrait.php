@@ -10,7 +10,6 @@ use Nip\Form\Renderer\AbstractRenderer;
  */
 trait HasRendererTrait
 {
-
     protected $_renderer;
 
     /**

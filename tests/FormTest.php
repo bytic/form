@@ -14,7 +14,6 @@ use Nip_Form_Renderer_Table;
  */
 class FormTest extends AbstractTest
 {
-
     /**
      * @var Form
      */

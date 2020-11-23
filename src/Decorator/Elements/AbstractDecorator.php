@@ -14,8 +14,8 @@ abstract class AbstractDecorator
     use HasElementTrait;
     use HasSeparatorTrait;
 
-    const APPEND = 'APPEND';
-    const PREPEND = 'PREPEND';
+    public const APPEND = 'APPEND';
+    public const PREPEND = 'PREPEND';
 
     protected $_name;
 
@@ -42,10 +42,10 @@ abstract class AbstractDecorator
         $decorator = $this->generate();
         switch ($this->_placement) {
             case self::PREPEND:
-                return $decorator.$this->getSeparator().$content;
+                return $decorator . $this->getSeparator() . $content;
             case self::APPEND:
             default:
-                return $content.$this->getSeparator().$decorator;
+                return $content . $this->getSeparator() . $decorator;
         }
     }
 

@@ -16,7 +16,7 @@ trait HasClassTrait
         $classes = func_get_args();
         $classes = array_map('trim', $classes);
         if (is_array($classes)) {
-            $classes = implode(' ', $classes).' '.$this->getAttrib('class');
+            $classes = implode(' ', $classes) . ' ' . $this->getAttrib('class');
             $newClasses = explode(' ', $classes);
             $newClasses = array_filter($newClasses);
             $newClasses = array_unique($newClasses);
