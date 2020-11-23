@@ -107,10 +107,14 @@ trait HasModelTrait
     public function saveToModel()
     {
         $elements = $this->getElements();
-        if (is_array($elements)) {
-            foreach ($elements as $name => $element) {
-                $this->getModel()->{$name} = $element->getValue('model');
+        if (!is_array($elements)) {
+            return;
+        }
+        foreach ($elements as $name => $element) {
+            if ($element instanceof \Nip_Form_Element_File) {
+                continue;
             }
+            $this->getModel()->{$name} = $element->getValue('model');
         }
     }
 
