@@ -1,4 +1,5 @@
 <?php
+
 class Nip_Form_Element_Textarea extends Nip\Form\Elements\AbstractElement
 {
     protected $_type = 'textarea';

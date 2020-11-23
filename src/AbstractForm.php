@@ -26,8 +26,8 @@ abstract class AbstractForm implements FormInterface
     use Traits\MessagesTrait;
     use Traits\NewElementsMethods;
 
-    const ENCTYPE_URLENCODED = 'application/x-www-form-urlencoded';
-    const ENCTYPE_MULTIPART = 'multipart/form-data';
+    public const ENCTYPE_URLENCODED = 'application/x-www-form-urlencoded';
+    public const ENCTYPE_MULTIPART = 'multipart/form-data';
 
     /**
      * @var array

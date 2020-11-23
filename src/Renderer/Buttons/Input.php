@@ -1,4 +1,5 @@
 <?php
+
 class Nip_Form_Renderer_Button_Input extends Nip_Form_Renderer_Button_Abstract
 {
     public function generateItem()

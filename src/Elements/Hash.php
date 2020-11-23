@@ -39,7 +39,7 @@ class Nip_Form_Element_Hash extends Nip_Form_Element_Hidden
 
     public function getSessionName()
     {
-        return $this->getForm()->getName().'_'.$this->getSalt();
+        return $this->getForm()->getName() . '_' . $this->getSalt();
     }
 
     public function getSessionValue()
@@ -58,10 +58,10 @@ class Nip_Form_Element_Hash extends Nip_Form_Element_Hidden
     {
         return md5(
             mt_rand(1, 1000000)
-            .$this->getSalt()
-            .$this->getName()
-            .session_id()
-            .mt_rand(1, 1000000)
+            . $this->getSalt()
+            . $this->getName()
+            . session_id()
+            . mt_rand(1, 1000000)
         );
     }
 }

@@ -8,7 +8,6 @@ namespace Nip\Form\Traits;
  */
 trait HasExecutionMethodsTrait
 {
-
     /**
      * @return bool
      */

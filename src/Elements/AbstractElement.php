@@ -117,12 +117,12 @@ abstract class AbstractElement implements ElementInterface
     public function validate()
     {
         if ($this->isRequired() && !$this->getValue()) {
-            $message = $this->getForm()->getMessageTemplate('no-'.$this->getName());
+            $message = $this->getForm()->getMessageTemplate('no-' . $this->getName());
             if (!$message) {
                 $translateSlug = 'general.form.errors.required';
                 $message = app('translator')->translate($translateSlug, ['label' => $this->getLabel()]);
                 if ($message == $translateSlug) {
-                    $message = $message ? $message : 'The field `'.$this->getLabel().'` is mandatory.';
+                    $message = $message ? $message : 'The field `' . $this->getLabel() . '` is mandatory.';
                 }
             }
             $this->addError($message);

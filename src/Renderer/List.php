@@ -15,7 +15,7 @@ class Nip_Form_Renderer_List extends AbstractRenderer
 
     public function addClassName($name)
     {
-        $this->_list['class'] .= ' '.$name;
+        $this->_list['class'] .= ' ' . $name;
 
         return $this;
     }
@@ -24,7 +24,7 @@ class Nip_Form_Renderer_List extends AbstractRenderer
     {
         $return = '<ul';
         foreach ($this->_list as $attrib => $value) {
-            $return .= ' '.$attrib.'="'.$value.'"';
+            $return .= ' ' . $attrib . '="' . $value . '"';
         }
         $return .= '>';
 
@@ -47,8 +47,8 @@ class Nip_Form_Renderer_List extends AbstractRenderer
 
                 $return = $this->renderLabel($element);
 
-                $class = "value ".($element->getType() == 'input' ? 'input' : '');
-                $return .= '<span class="'.$class.'">';
+                $class = "value " . ($element->getType() == 'input' ? 'input' : '');
+                $return .= '<span class="' . $class . '">';
                 $return .= $element->renderElement();
                 $return .= '</span>';
 

@@ -85,7 +85,7 @@ abstract class Nip_Form_Renderer_Button_Abstract
                     $value = $overrides[$name];
                 }
 
-                $return .= ' '.$name.'="'.$value.'"';
+                $return .= ' ' . $name . '="' . $value . '"';
             }
         }
 

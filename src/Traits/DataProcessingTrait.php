@@ -8,7 +8,6 @@ namespace Nip\Form\Traits;
  */
 trait DataProcessingTrait
 {
-
     /**
      * @param $request
      */
@@ -24,7 +23,6 @@ trait DataProcessingTrait
                         $data = is_array($request[$name]) ? $request[$name] : [$request[$name]];
                         $element->getData($data, 'request');
                     }
-
                 } else {
                     $value = isset($request[$name]) ? $request[$name] : null;
                     if (strpos($name, '[') && strpos($name, ']')) {

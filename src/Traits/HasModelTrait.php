@@ -37,7 +37,7 @@ trait HasModelTrait
      */
     public function getModelMessage($name, $variables = [])
     {
-        return $this->getModelManager()->getMessage('form.'.$name, $variables);
+        return $this->getModelManager()->getMessage('form.' . $name, $variables);
     }
 
     /**
