@@ -32,7 +32,7 @@ trait DataProcessingTrait
                         preg_match_all('/\[([^\]]*)\]/', $arrayKeys, $arr_matches, PREG_PATTERN_ORDER);
                         $value = $request[$arrayPrimary];
                         foreach ($arr_matches[1] as $dimension) {
-                            $value = $value[$dimension];
+                            $value = isset($value[$dimension]) ? $value[$dimension] : null;
                         }
                     }
                     $element->getData($value, 'request');
