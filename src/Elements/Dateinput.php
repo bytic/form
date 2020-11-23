@@ -72,6 +72,10 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
         }
     }
 
+    /**
+     * @param string $requester
+     * @return null
+     */
     public function getValue($requester = 'abstract')
     {
         $value = parent::getValue($requester);
@@ -85,15 +89,20 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
         return $value;
     }
 
+    /**
+     * @param false $format
+     * @return false|int
+     */
     public function getUnix($format = false)
     {
         $format = $format ? $format : $this->_format;
         $value = $this->getValue();
-        if ($value) {
-            $date = date_create_from_format($format, $this->getValue());
+        $date = ($value) ? date_create_from_format($format, $this->getValue()) :false;
+        if ($date instanceof DateTime) {
+            return $date->getTimestamp();
         }
 
-        return $date ? $date->getTimestamp() : false;
+        return false;
     }
 
     public function validateFormat($format = false)
@@ -112,5 +121,6 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
             $message = $message ? $message : 'I couldn\'t parse the ' . strtolower($this->getLabel()) . ' you entered';
             $this->addError($message);
         }
+        return false;
     }
 }
