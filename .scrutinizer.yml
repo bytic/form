@@ -2,6 +2,7 @@ checks:
   php:
     code_rating: true
     duplication: true
+
 build:
   nodes:
     analysis:
@@ -10,6 +11,7 @@ build:
           - php-scrutinizer-run
   environment:
     php: '7.2'
+
 tools:
   php_code_coverage:
     enabled: true

@@ -23,32 +23,37 @@ class Nip_Form_Element_Dateselect extends Nip_Form_Element_MultiElement
 
         if (!$this->hasElement('day')) {
             $dayElement = $this->getForm()->getNewElement('select');
+            $dayElement->addOption('', '--');
 
             for ($i = 1; $i <= 31; $i++) {
                 $dayElement->addOption($i, $i);
             }
-            $dayElement->setValue(date('d'));
+//            $dayElement->setValue(date('d'));
             $this->elements['day'] = $dayElement;
         }
 
 
         if (!$this->hasElement('month')) {
             $monthElement = $this->getForm()->getNewElement('select');
+            $monthElement->addOption('', '--');
+
             for ($i = 1; $i <= 12; $i++) {
                 $monthElement->addOption($i, date('M', mktime(0, 0, 0, $i, 1, 2014)));
             }
-            $monthElement->setValue(date('m'));
+//            $monthElement->setValue(date('m'));
             $this->elements['month'] = $monthElement;
         }
 
         if (!$this->hasElement('year')) {
             $yearElement = $this->getForm()->getNewElement('select');
+            $yearElement->addOption('', '--');
+
             $years = $this->getOption('years', range((int)date('Y') - 100, date('Y') + 5));
 
             foreach ($years as $year) {
                 $yearElement->addOption($year, $year);
             }
-            $yearElement->setValue(date('Y'));
+//            $yearElement->setValue(date('Y'));
             $this->elements['year'] = $yearElement;
         }
     }
@@ -176,6 +181,10 @@ class Nip_Form_Element_Dateselect extends Nip_Form_Element_MultiElement
         $day = $this->elements['day']->getValue();
         $month = $this->elements['month']->getValue();
         $year = $this->elements['year']->getValue();
+
+        if ($day < 1 || $month < 1 || $year < 1) {
+            return 0;
+        }
 
         return mktime(0, 0, 0, $month, $day, $year);
     }
