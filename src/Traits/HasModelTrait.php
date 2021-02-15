@@ -15,6 +15,11 @@ trait HasModelTrait
      */
     protected $model;
 
+    public function bind()
+    {
+
+    }
+
     public function initialized()
     {
         parent::initialized();
