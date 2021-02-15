@@ -18,3 +18,5 @@ Form Component
 * https://github.com/auraphp/Aura.Input
 * https://github.com/nette/forms
 * https://github.com/laminas/laminas-form
+* https://github.com/formr/Formr
+* https://docs.phalcon.io/4.0/en/forms
