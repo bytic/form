@@ -17,6 +17,9 @@ class Nip_Form_Renderer_Elements_Select extends \Nip\Form\Renderer\Elements\Abst
     {
         $options = $options ? $options : $this->getElement()->getOptions();
         $return = '';
+
+        $selectedValue = $this->getElement()->getValue();
+
         foreach ($options as $value=>$atribs) {
             if (is_string($value) && !isset($atribs['label'])) {
                 $return .= '<optgroup label="' . $value . '">';
@@ -29,12 +32,7 @@ class Nip_Form_Renderer_Elements_Select extends \Nip\Form\Renderer\Elements\Abst
                 unset($atribs['label']);
 
                 $atribs['value'] = $value;
-                $selectedValue = $this->getElement()->getValue();
-                if ($selectedValue === 0 or $value === 0) {
-                    if ($value === $selectedValue) {
-                        $atribs['selected'] = 'selected';
-                    }
-                } elseif ($this->getElement()->getValue() == $value) {
+                if ($this->isOptionSelected($value, $selectedValue)) {
                     $atribs['selected'] = 'selected';
                 }
 
@@ -47,9 +45,23 @@ class Nip_Form_Renderer_Elements_Select extends \Nip\Form\Renderer\Elements\Abst
         return $return;
     }
 
-    public function getElementAttribs()
+    /**
+     * @param $value
+     * @param $selectedValue
+     * @return bool
+     */
+    protected function isOptionSelected($value, $selectedValue): bool
     {
-        $attribs = parent::getElementAttribs();
-        return $attribs;
+        if (is_null($selectedValue)) {
+            return false;
+        }
+        if ($selectedValue === 0 or $value === 0) {
+            if ($value === $selectedValue) {
+                return true;
+            }
+        } elseif ($selectedValue == $value) {
+            return true;
+        }
+        return false;
     }
 }

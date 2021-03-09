@@ -12,11 +12,13 @@ use Nip\Form\AbstractForm;
  * @method addHidden($name, $label = false, $isRequired = false)
  * @method addPassword($name, $label = false, $isRequired = false)
  * @method addSelect($name, $label = false, $isRequired = false)
+ * @method addMultiSelect($name, $label = false, $isRequired = false)
  * @method addDateinput($name, $label = false, $isRequired = false)
  * @method addRadioGroup($name, $label = false, $isRequired = false)
  * @method addBsRadioGroup($name, $label = false, $isRequired = false)
  * @method addTextarea($name, $label = false, $isRequired = false)
  * @method addTextSimpleEditor($name, $label = false, $isRequired = false)
+ * @method addTextMiniEditor($name, $label = false, $isRequired = false)
  * @method addFile($name, $label = false, $isRequired = false)
  * @method addMultiElement($name, $label = false, $isRequired = false)
  */
@@ -37,6 +39,7 @@ trait MagicMethodElementsFormTrait
         'textSimpleEditor',
         'textMiniEditor',
         'select',
+        'multiSelect',
         'radio',
         'radioGroup',
         'checkbox',

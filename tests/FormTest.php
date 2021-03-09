@@ -4,6 +4,7 @@ namespace Nip\Form\Tests;
 
 use Nip_Form as Form;
 use Nip_Form_Element_Select as Select;
+use Nip_Form_Element_MultiSelect as MultiSelect;
 use Nip_Form_Renderer_Bootstrap;
 use Nip_Form_Renderer_Bootstrap4;
 use Nip_Form_Renderer_Table;
@@ -18,16 +19,6 @@ class FormTest extends AbstractTest
      * @var Form
      */
     protected $object;
-
-    public function testAddSelect()
-    {
-        $this->object->addSelect('add_select');
-
-        /** @noinspection PhpUndefinedFieldInspection */
-        self::assertInstanceOf(Select::class, $this->object->add_select);
-
-        self::assertInstanceOf(Select::class, $this->object->getElement('add_select'));
-    }
 
     /**
      * @dataProvider rendererTypeProvider

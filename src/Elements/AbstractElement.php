@@ -97,10 +97,19 @@ abstract class AbstractElement implements ElementInterface
      */
     public function getDataFromRequest($request)
     {
-        $request = clean($request);
+        $request = $this->sanitizeDataFromRequest($request);
         $this->setValue($request);
 
         return $this;
+    }
+
+    /**
+     * @param $request
+     * @return string
+     */
+    protected function sanitizeDataFromRequest($request)
+    {
+        return clean($request);
     }
 
     /**
