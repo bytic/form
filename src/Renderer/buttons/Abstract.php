@@ -10,7 +10,7 @@ abstract class Nip_Form_Renderer_Button_Abstract
 {
     protected $_renderer;
 
-    protected $_button;
+    protected $_item;
 
     /**
      * @param AbstractRenderer $renderer

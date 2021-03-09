@@ -77,14 +77,14 @@ class Nip_Form_Element_MultiElement extends AbstractElement
     /**
      * @param $name
      * @return Nip\Form\Elements\AbstractElement
-     * @throws \Nip\Logger\Exception
+     * @throws \Exception
      */
     public function getElement($name)
     {
         if ($this->hasElement($name)) {
             return $this->elements[$name];
         }
-        throw new \Nip\Logger\Exception("Invalid child element");
+        throw new \Exception("Invalid child element");
     }
 
     /**

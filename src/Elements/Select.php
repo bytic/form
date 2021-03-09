@@ -18,9 +18,9 @@ class Nip_Form_Element_Select extends Nip\Form\Elements\AbstractElement
             $oLabel = $option->$labelKey;
             $oDisabled = $option->disabled;
 
-            $atribs = array(
+            $atribs = [
                 'label' => $oLabel,
-            );
+            ];
 
             if ($oDisabled) {
                 $atribs['disabled'] = 'disabled';
