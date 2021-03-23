@@ -148,7 +148,7 @@ abstract class AbstractElementRenderer
         $elementAttribs = $this->getElementAttribs();
         $return = '';
         foreach ($attribs as $name => $value) {
-            if (in_array($name, $elementAttribs)) {
+            if (strpos($name, 'data-') === 0 || in_array($name, $elementAttribs)) {
                 if (in_array($name, array_keys($overrides))) {
                     $value = $overrides[$name];
                 }

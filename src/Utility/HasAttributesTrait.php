@@ -136,6 +136,19 @@ trait HasAttributesTrait
      * @param $value
      * @return static
      */
+    public function setDataAttrib($key, $value)
+    {
+        $key = 'data-' . (string)$key;
+        $this->_attribs[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return static
+     */
     public function setAttrib($key, $value)
     {
         $key = (string)$key;
