@@ -10,7 +10,15 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
     public function init()
     {
         parent::init();
+        $this->setAttrib('type', 'date');
+
+        if (app()->has('locale') == false) {
+            return;
+        }
         $localeObj = app('locale');
+        if (!($localeObj instanceof \Nip\Locale\Locale)) {
+            return;
+        }
         $this->setLocale($localeObj->getCurrent());
         $this->setFormat($localeObj->getOption(['time', 'dateFormat']));
     }
