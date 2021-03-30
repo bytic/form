@@ -9,7 +9,13 @@ class Nip_Form_Renderer_Elements_Dateinput extends Nip_Form_Renderer_Elements_In
             $this->getElement()->addClass('datepicker');
         }
         $return = parent::generateElement();
-        $return .= '<script type="text/javascript">';
+//        $return .= $this->generateElementJavscript();
+        return $return;
+    }
+
+    protected function generateElementJavscript()
+    {
+        $return = '<script type="text/javascript">';
         $return .= 'document.addEventListener("DOMContentLoaded", function() {';
 
         $options = [];
@@ -21,11 +27,14 @@ class Nip_Form_Renderer_Elements_Dateinput extends Nip_Form_Renderer_Elements_In
             $options[] = 'yearRange: "' . $yearRange . '"';
         }
         $format = $this->getElement()->getFormat();
-        $format = strtr($format, [
-            'Y' => 'yy',
-            'd' => 'dd',
-            'm' => 'mm',
-        ]);
+        $format = strtr(
+            $format,
+            [
+                'Y' => 'yy',
+                'd' => 'dd',
+                'm' => 'mm',
+            ]
+        );
         $options[] = 'dateFormat: "' . $format . '"';
 
         $return .= "    jQuery('#{$this->getElement()->getAttrib('id')}').datepicker({
@@ -33,6 +42,7 @@ class Nip_Form_Renderer_Elements_Dateinput extends Nip_Form_Renderer_Elements_In
 		});";
         $return .= '});';
         $return .= '</script>';
+
         return $return;
     }
 }
