@@ -4,7 +4,7 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
 {
     protected $_type = 'dateinput';
     protected $_locale = 'ct_EN';
-    protected $_format = 'M d Y';
+    protected $_format = 'Y-m-d';
     protected $_hasTime = false;
 
     public function init()
@@ -55,21 +55,26 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
 
     public function getData($data, $source = 'abstract')
     {
-        if ($source == 'model') {
-            if ($data && $data != '0000-00-00' && $data != '0000-00-00 00:00:00') {
-                $dateUnix = strtotime($data);
-                if ($dateUnix && $dateUnix !== false && $dateUnix > -62169989992) {
-                    $this->setValue(date($this->_format, $dateUnix));
+        if ($source != 'model') {
+            return parent::getData($data, $source);
+        }
 
-                    return $this;
-                }
-            }
-            $this->setValue('');
-
+        if ($data instanceof DateTime) {
+            $this->setValue($data->format('Y-m-d'));
             return $this;
         }
 
-        return parent::getData($data, $source);
+        if ($data && $data != '0000-00-00' && $data != '0000-00-00 00:00:00') {
+            $dateUnix = strtotime($data);
+            if ($dateUnix && $dateUnix !== false && $dateUnix > -62169989992) {
+                $this->setValue(date('Y-m-d', $dateUnix));
+
+                return $this;
+            }
+        }
+        $this->setValue('');
+
+        return $this;
     }
 
     public function validate()
@@ -103,7 +108,7 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
      */
     public function getUnix($format = false)
     {
-        $format = $format ? $format : $this->_format;
+        $format = 'Y-m-d';
         $value = $this->getValue();
         $date = ($value) ? date_create_from_format($format, $this->getValue()) :false;
         if ($date instanceof DateTime) {
@@ -115,11 +120,11 @@ class Nip_Form_Element_Dateinput extends Nip_Form_Element_Input
 
     public function validateFormat($format = false)
     {
-        $format = $format ? $format : $this->_format;
+        $format = 'Y-m-d';
         $value = $this->getValue();
 
         if ($value) {
-            $unixTime = $this->getUnix($format);
+            $unixTime = $this->getUnix('Y-m-d');
             if ($unixTime) {
                 $this->setValue(date($format, $unixTime));
 
