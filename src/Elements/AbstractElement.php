@@ -10,12 +10,13 @@ use Nip\Form\Elements\Traits\HasOptionsTrait;
 use Nip\Form\Elements\Traits\HasRendererTrait;
 use Nip\Form\Elements\Traits\HasTypeTrait;
 use Nip\Form\Elements\Traits\HasUniqueIdTrait;
+use Symfony\Component\Form\AbstractType;
 
 /**
  * Class AbstractElement
  * @package Nip\Form\Elements
  */
-abstract class AbstractElement implements ElementInterface
+abstract class AbstractElement extends AbstractType implements ElementInterface
 {
     use HasUniqueIdTrait;
     use HasAttributesTrait;

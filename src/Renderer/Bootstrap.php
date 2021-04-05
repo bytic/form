@@ -94,7 +94,14 @@ class Nip_Form_Renderer_Bootstrap extends AbstractRenderer
     {
         $element->addClass('form-control');
 
-        return parent::renderElement($element);
+        $output = parent::renderElement($element);
+        if ($element instanceof Nip_Form_Element_Money) {
+            $output = '<div class="input-group">'
+                . $output
+                . '<span class="input-group-text">' . $element->getOption('currency') . '</span>'
+                . '</div>';
+        }
+        return $output;
     }
 
     /**

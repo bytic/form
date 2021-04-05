@@ -5,6 +5,7 @@ namespace Nip\Form;
 use Nip\Container\ServiceProviders\Providers\AbstractServiceProvider;
 use Nip\Container\ServiceProviders\Providers\BootableServiceProviderInterface;
 use Symfony\Component\Form\FormRegistry;
+use Symfony\Component\Form\ResolvedFormTypeFactory;
 
 /**
  * Class FilesystemServiceProvider
@@ -15,13 +16,20 @@ use Symfony\Component\Form\FormRegistry;
  */
 class FormServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface
 {
+    const FORM_REGISTRY = 'form.registry';
+    const FORM_EXTENSIONS = 'form.extensions';
+    const FORM_FACTORY = 'form.factory';
 
     /**
      * @inheritdoc
      */
-    public function provides()
+    public function provides(): array
     {
-        return ['form.registry','form.extensions'];
+        return [
+            static::FORM_REGISTRY,
+            static::FORM_EXTENSIONS,
+            static::FORM_FACTORY,
+        ];
     }
 
     /**
@@ -31,6 +39,7 @@ class FormServiceProvider extends AbstractServiceProvider implements BootableSer
     {
         $this->registerFormRegistry();
         $this->registerFormExtensions();
+        $this->registerFormFactory();
     }
 
     public function boot()
@@ -45,12 +54,15 @@ class FormServiceProvider extends AbstractServiceProvider implements BootableSer
      */
     protected function registerFormRegistry()
     {
-        $this->getContainer()->share('form.registry', function () {
-            return new FormRegistry(
-                $this->getContainer()->get('form.extensions'),
-                $this->getContainer()->get('form.extensions')
-            );
-        });
+        $this->getContainer()->share(
+            static::FORM_REGISTRY,
+            function () {
+                return new FormRegistry(
+                    $this->getContainer()->get(static::FORM_EXTENSIONS),
+                    new ResolvedFormTypeFactory()
+                );
+            }
+        );
     }
 
     /**
@@ -60,10 +72,30 @@ class FormServiceProvider extends AbstractServiceProvider implements BootableSer
      */
     protected function registerFormExtensions()
     {
-        $this->getContainer()->share('form.extensions', function () {
-            return [
+        $this->getContainer()->share(
+            static::FORM_EXTENSIONS,
+            function () {
+                return [
 
-            ];
-        });
-}
+                ];
+            }
+        );
+    }
+
+    /**
+     * Register the native filesystem implementation.
+     *
+     * @return void
+     */
+    protected function registerFormFactory()
+    {
+        $this->getContainer()->share(
+            static::FORM_FACTORY,
+            function () {
+                return new \Symfony\Component\Form\FormFactory(
+                    $this->getContainer()->get(static::FORM_REGISTRY)
+                );
+            }
+        );
+    }
 }
