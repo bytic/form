@@ -21,6 +21,7 @@ use Nip\Form\AbstractForm;
  * @method addTextMiniEditor($name, $label = false, $isRequired = false)
  * @method addFile($name, $label = false, $isRequired = false)
  * @method addMultiElement($name, $label = false, $isRequired = false)
+ * @method addMoney($name, $label = false, $isRequired = false)
  * @method addTime($name, $label = false, $isRequired = false)
  * @method addTimeselect($name, $label = false, $isRequired = false)
  */
@@ -42,6 +43,7 @@ trait MagicMethodElementsFormTrait
         'textSimpleEditor',
         'textMiniEditor',
         'select',
+        'money',
         'multiSelect',
         'radio',
         'radioGroup',

@@ -8,6 +8,7 @@ class Nip_Form_Element_Money extends Nip_Form_Element_Input
     {
         parent::init();
         $this->setAttrib('type', 'number');
+        $this->setAttrib('step', '1');
         $this->setOption('currency', '');
     }
 
@@ -16,8 +17,12 @@ class Nip_Form_Element_Money extends Nip_Form_Element_Input
      */
     public function setValue($value)
     {
-        if (is_object($value)) {
+        if ($value instanceof \ByTIC\Money\Money) {
             /** @var \ByTIC\Money\Money $value */
+            $scale = $value::getCurrencies()->subunitFor($value->getCurrency());
+
+            $step = pow(1/10, $scale);
+            $this->setAttrib('step', $step);
             $this->setOption('currency', $value->getCurrency());
             $value = $value->formatByDecimal();
         }
@@ -29,6 +34,10 @@ class Nip_Form_Element_Money extends Nip_Form_Element_Input
      */
     public function getValue($requester = 'abstract')
     {
-        return parent::getValue($requester);
+        $return = parent::getValue($requester);
+        if ($requester == 'model') {
+            return \ByTIC\Money\Money::parseByDecimal($return, $this->getOption('currency'));
+        }
+        return $return;
     }
 }
