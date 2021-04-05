@@ -22,7 +22,7 @@ class MoneyTest extends AbstractTest
         $html = $form->getRenderer()->renderElement($element);
 
         self::assertSame(
-            '<div class="input-group"><input  type="number" value="2233.44" class="form-control " title="" /><span class="input-group-text">RON</span></div>',
+            '<div class="input-group"><input  type="number" step="0.01" value="2233.44" class="form-control " title="" /><span class="input-group-text">RON</span></div>',
             $html
         );
     }
