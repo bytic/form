@@ -17,7 +17,7 @@ class DateinputTest extends AbstractTest
         $html = $element->render();
 
         self::assertSame(
-            '<input  type="date" name="mydate" id="mydate" class="datepicker " title="" />',
+            '<input  type="date" name="mydate" id="mydate" title="" />',
             $html
         );
     }
