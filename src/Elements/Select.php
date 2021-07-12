@@ -16,7 +16,7 @@ class Nip_Form_Element_Select extends Nip\Form\Elements\AbstractElement
 
             $oValue = $option->$valueKey;
             $oLabel = $option->$labelKey;
-            $oDisabled = $option->disabled;
+            $oDisabled = $option->disabled ?? false;
 
             $atribs = [
                 'label' => $oLabel,
