@@ -7,6 +7,8 @@ class Nip_Form_Renderer_Elements_Select extends \Nip\Form\Renderer\Elements\Abst
      */
     public function generateElement()
     {
+        $this->getElement()->addClass('form-select');
+
         $return = '<select ';
         $return .= $this->renderAttributes();
         $return .= ' >' . $this->renderOptions() . '</select>';
