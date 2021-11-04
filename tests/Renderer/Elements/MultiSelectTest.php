@@ -16,7 +16,7 @@ class MultiSelectTest extends AbstractTest
         $renderer = $this->generateTestRenderer();
         $html = $renderer->render();
 
-        self::assertSame('<select  name="multi[]" title="Multi element" multiple ></select>', $html);
+        self::assertSame('<select  name="multi[]" class="form-select " title="Multi element" multiple ></select>', $html);
     }
 
     public function testRenderElement()
@@ -29,7 +29,7 @@ class MultiSelectTest extends AbstractTest
         $renderer->getElement()->addOption('val3', 'Opt 3');
 
         self::assertSame(
-            '<select  name="multi[]" title="Multi element" multiple >'
+            '<select  name="multi[]" class="form-select " title="Multi element" multiple >'
             . '<option value="val1">Opt 1</option><option value="val2">Opt 2</option><option value="val3">Opt 3</option>'
             . '</select>',
             $renderer->render()
@@ -38,7 +38,7 @@ class MultiSelectTest extends AbstractTest
         $renderer->getElement()->setValue(['val2']);
 
         self::assertSame(
-            '<select  name="multi[]" title="Multi element" multiple >'
+            '<select  name="multi[]" class="form-select form-select " title="Multi element" multiple >'
             . '<option value="val1">Opt 1</option><option value="val2" selected="selected">Opt 2</option><option value="val3">Opt 3</option>'
             . '</select>',
             $renderer->render()

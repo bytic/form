@@ -30,9 +30,11 @@ class Nip_Form_Renderer_DisplayGroup
         $return = '<fieldset' . $this->renderAttributes() . '>';
         $return .= '<legend>' . $this->getGroup()->getLegend() . '</legend>';
 
-        $renderer = clone $this->getGroup()->getForm()->getRenderer();
-        $renderer->setElements($this->getGroup()->toArray());
-        $return .= $renderer->renderElements();
+        if (count($this->getGroup())) {
+            $renderer = clone $this->getGroup()->getForm()->getRenderer();
+            $renderer->setElements($this->getGroup()->toArray());
+            $return .= $renderer->renderElements();
+        }
         $return .= '</fieldset>';
         return $return;
     }
@@ -43,7 +45,7 @@ class Nip_Form_Renderer_DisplayGroup
         $elementAttribs = $this->getElementAttribs();
         $return = '';
         foreach ($attribs as $name => $value) {
-            if (in_array($name, $elementAttribs)) {
+            if (strpos($name, 'data-') === 0 || in_array($name, $elementAttribs)) {
                 if (in_array($name, array_keys($overrides))) {
                     $value = $overrides[$name];
                 }
@@ -55,6 +57,6 @@ class Nip_Form_Renderer_DisplayGroup
 
     public function getElementAttribs()
     {
-        return array('id', 'style', 'class');
+        return ['id', 'style', 'class'];
     }
 }
