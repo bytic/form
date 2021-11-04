@@ -22,6 +22,7 @@ use Nip\Form\AbstractForm;
  * @method addFile($name, $label = false, $isRequired = false)
  * @method addMultiElement($name, $label = false, $isRequired = false)
  * @method addMoney($name, $label = false, $isRequired = false)
+ * @method addTel($name, $label = false, $isRequired = false)
  * @method addTime($name, $label = false, $isRequired = false)
  * @method addTimeselect($name, $label = false, $isRequired = false)
  */
@@ -36,6 +37,7 @@ trait MagicMethodElementsFormTrait
         'multiElement',
         'dateinput',
         'dateselect',
+        'tel',
         'time',
         'timeselect',
         'textarea',
