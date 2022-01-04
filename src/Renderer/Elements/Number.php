@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class Nip_Form_Renderer_Elements_Number extends Nip_Form_Renderer_Elements_Input
 {
 
@@ -10,6 +12,8 @@ class Nip_Form_Renderer_Elements_Number extends Nip_Form_Renderer_Elements_Input
     {
         $attribs = parent::getElementAttribs();
         $attribs[] = 'step';
+        $attribs[] = 'min';
+        $attribs[] = 'max';
 
         return $attribs;
     }
