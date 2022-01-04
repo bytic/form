@@ -1,14 +1,14 @@
 <?php
 
-class Nip_Form_Element_Money extends Nip_Form_Element_Input
+use ByTIC\Money\Money;
+
+class Nip_Form_Element_Money extends Nip_Form_Element_Number
 {
     protected $_type = 'money';
 
     public function init()
     {
         parent::init();
-        $this->setAttrib('type', 'number');
-        $this->setAttrib('step', '1');
         $this->setOption('currency', '');
     }
 
@@ -17,11 +17,11 @@ class Nip_Form_Element_Money extends Nip_Form_Element_Input
      */
     public function setValue($value)
     {
-        if ($value instanceof \ByTIC\Money\Money) {
-            /** @var \ByTIC\Money\Money $value */
+        if ($value instanceof Money) {
+            /** @var Money $value */
             $scale = $value::getCurrencies()->subunitFor($value->getCurrency());
 
-            $step = pow(1/10, $scale);
+            $step = pow(1 / 10, $scale);
             $this->setAttrib('step', $step);
             $this->setOption('currency', $value->getCurrency());
             $value = $value->formatByDecimal();
@@ -36,7 +36,7 @@ class Nip_Form_Element_Money extends Nip_Form_Element_Input
     {
         $return = parent::getValue($requester);
         if ($requester == 'model') {
-            return \ByTIC\Money\Money::parseByDecimal($return, $this->getOption('currency'));
+            return Money::parseByDecimal($return, $this->getOption('currency'));
         }
         return $return;
     }
