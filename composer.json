@@ -37,22 +37,6 @@
     "bytic/orm": "^0.9|^1.0",
     "bytic/money": "^0.9|^1.0",
     "bytic/controllers": "^0.9|^1.0",
-    "bytic/phpqatools": "^1.0",
-    "mockery/mockery": "^1.0"
-  },
-  "scripts": {
-    "tests": [
-      "@analyse",
-      "@test"
-    ],
-    "test": [
-      "phpunit"
-    ],
-    "analyse": [
-      "@stan",
-      "@psalm"
-    ],
-    "stan": "phpstan analyse",
-    "psalm": "psalm --output-format=compact --find-dead-code --find-unused-psalm-suppress --long-progress "
+    "bytic/phpqatools": "^1.0"
   }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Form\Traits;
 
 /**
@@ -45,6 +47,9 @@ trait CanInitializeTrait
         $this->initialize();
     }
 
+    /**
+     * @return void
+     */
     public function initialize()
     {
         $this->initAction();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Form\Utility;
 
 /**
@@ -70,7 +72,7 @@ trait HasAttributesTrait
 
     /**
      * @param string $requester
-     * @return null
+     * @return null|mixed
      */
     public function getValue($requester = 'abstract')
     {
@@ -159,7 +161,7 @@ trait HasAttributesTrait
 
     /**
      * @param string $key
-     * @return null
+     * @return null|mixed
      */
     public function getAttrib($key)
     {
