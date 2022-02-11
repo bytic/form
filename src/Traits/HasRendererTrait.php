@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nip\Form\Traits;
 
 use Nip\Form\Renderer\AbstractRenderer;
@@ -85,6 +87,7 @@ trait HasRendererTrait
     public function getRenderer()
     {
         if (!$this->_renderer) {
+            $this->initializeIfNotInitialized();
             $this->_renderer = $this->getNewRenderer();
         }
 

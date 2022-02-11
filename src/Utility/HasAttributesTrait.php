@@ -105,7 +105,8 @@ trait HasAttributesTrait
     {
         $classes = func_get_args();
         if (is_array($classes)) {
-            $oldClasses = explode(' ', $this->getAttrib('class'));
+            $oldClasses = $this->getAttrib('class');
+            $oldClasses = empty($oldClasses) ? [] : explode(' ', $oldClasses);
             $classes = array_merge($classes, $oldClasses);
             $this->setAttrib('class', implode(' ', $classes));
         }
