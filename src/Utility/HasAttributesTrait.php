@@ -121,7 +121,8 @@ trait HasAttributesTrait
     {
         $removeClasses = func_get_args();
         if (is_array($removeClasses)) {
-            $classes = explode(' ', $this->getAttrib('class'));
+            $classes = $this->getAttrib('class');
+            $classes = empty($classes) ? [] : explode(' ', $classes);
             foreach ($removeClasses as $class) {
                 $key = array_search($class, $classes);
                 if ($key !== false) {
