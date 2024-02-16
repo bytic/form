@@ -143,7 +143,8 @@ abstract class AbstractElementRenderer
     {
         $attribs = $this->getElement()->getAttribs();
         if (!isset($attribs['title'])) {
-            $attribs['title'] = strip_tags($this->getElement()->getLabel());
+            $label = $this->getElement()->getLabel();
+            $attribs['title'] = $label ? strip_tags($label) : '';
         }
         $elementAttribs = $this->getElementAttribs();
         $return = '';
