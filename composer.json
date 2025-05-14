@@ -34,9 +34,20 @@
   },
   "require-dev": {
     "bytic/view": "^1.0|^2.0",
+    "bytic/google-recaptcha": "^1.0",
     "bytic/orm": "^1.0|^2.0",
     "bytic/money": "^1.0|^2.0",
     "bytic/controllers": "^1.0|^2.0",
     "bytic/phpqatools": "^1.0"
-  }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "phpstan/extension-installer": true,
+      "ergebnis/composer-normalize": true,
+      "bytic/phpqatools": true
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
