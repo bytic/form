@@ -27,7 +27,7 @@
     }
   },
   "require": {
-    "php": "^7.0|^8.0",
+    "php": "^8.0",
     "bytic/locale": "^0.9|^1.0",
     "symfony/form": "^4.0|^5.0",
     "ezyang/htmlpurifier": "^4.0"

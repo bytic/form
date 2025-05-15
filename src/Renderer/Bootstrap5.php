@@ -31,7 +31,9 @@ class Nip_Form_Renderer_Bootstrap5 extends Nip_Form_Renderer_Bootstrap
 
             $class = '';
             if ($formType == 'form-horizontal') {
-                $class = $element->getType() == 'checkbox' ? 'col-sm-offset-3 col-sm-9' : 'col-sm-9';
+                $class = in_array($element->getType(), ['checkbox', 'recaptcha'])
+                    ? 'offset-sm-3 col-sm-9'
+                    : 'col-sm-9';
             }
 
             $return .= '<div class="' . $class . '">';
