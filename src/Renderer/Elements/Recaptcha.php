@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-class Nip_Form_Renderer_Elements_Recaptcha extends Nip_Form_Renderer_Elements_Hidden
+use Nip\Form\Renderer\Elements\AbstractElementRenderer;
+
+class Nip_Form_Renderer_Elements_Recaptcha extends AbstractElementRenderer
 {
     public function generateElement()
     {
