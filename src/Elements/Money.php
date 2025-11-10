@@ -21,7 +21,8 @@ class Nip_Form_Element_Money extends Nip_Form_Element_Number
             /** @var Money $value */
             $scale = $value::getCurrencies()->subunitFor($value->getCurrency());
 
-            $step = pow(1 / 10, $scale);
+            // create a step value based on the currency scale
+            $step = "0." . str_repeat("0", $scale - 1) . "1";
             $this->setAttrib('step', $step);
             $this->setOption('currency', $value->getCurrency());
             $value = $value->formatByDecimal();
