@@ -1,38 +1,14 @@
 <?php
 
-class Nip_Form_Renderer_Elements_Radio extends Nip_Form_Renderer_Elements_Input_Abstract
+use Nip\Form\Renderer\Elements\AbstractCheckElementRenderer;
+
+class Nip_Form_Renderer_Elements_Radio extends AbstractCheckElementRenderer
 {
-    /**
-     * @return string
-     */
-    public function generateElement()
-    {
-        $this->getElement()->addClass('form-check-input');
-
-        $class = get_class($this->getRenderer()) == Nip_Form_Renderer_Bootstrap::class ? 'radio' : 'form-check';
-        $return = '<div class="' . $class . '">';
-        $return .= '<label class="form-check-label">';
-        $return .= parent::generateElement();
-        $return .= $this->getElement()->getLabel();
-        $return .= '</label>';
-        $return .= '</div>';
-
-        return $return;
-    }
-
     /**
      * @return string
      */
     public function renderInput()
     {
         return parent::generateElement();
-    }
-
-    public function getelementattribs()
-    {
-        $attribs = parent::getelementattribs();
-        $attribs[] = 'checked';
-
-        return $attribs;
     }
 }
