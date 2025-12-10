@@ -19,7 +19,11 @@ abstract class Nip_Form_Renderer_Elements_Input_Group extends Nip_Form_Renderer_
         $elements = $this->getElement()->getElements();
         $returnElements = [];
         $return = '';
+        $isElementInline = $this->getElement()->hasOption('inline');
         foreach ($elements as $element) {
+            if ($isElementInline) {
+                $element->setOption('inline', true);
+            }
             $returnElements[] = $this->renderChildElement($element);
         }
         $return .= implode($this->getSeparator(), $returnElements);
