@@ -33,6 +33,14 @@ abstract class AbstractCheckElementRenderer extends Nip_Form_Renderer_Elements_I
         return $return;
     }
 
+    /**
+     * @return string
+     */
+    public function renderInput()
+    {
+        return parent::generateElement();
+    }
+
     public function getElementAttribs(): array
     {
         $attribs = parent::getElementAttribs();
