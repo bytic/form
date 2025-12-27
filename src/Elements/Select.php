@@ -102,4 +102,17 @@ class Nip_Form_Element_Select extends Nip\Form\Elements\AbstractElement
 
         return false;
     }
+
+    public function isGroup()
+    {
+        return $this->isRequestArray();
+    }
+
+    public function isRequestArray(): bool
+    {
+        if ($this->getAttrib('multiple')) {
+            return true;
+        }
+        return parent::isRequestArray();
+    }
 }
