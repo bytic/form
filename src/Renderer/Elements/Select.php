@@ -1,6 +1,8 @@
 <?php
 
-class Nip_Form_Renderer_Elements_Select extends \Nip\Form\Renderer\Elements\AbstractElementRenderer
+use Nip\Form\Renderer\Elements\AbstractElementRenderer;
+
+class Nip_Form_Renderer_Elements_Select extends AbstractElementRenderer
 {
     /**
      * @return string
@@ -65,5 +67,12 @@ class Nip_Form_Renderer_Elements_Select extends \Nip\Form\Renderer\Elements\Abst
             return true;
         }
         return false;
+    }
+
+    public function getElementAttribs()
+    {
+        $attribs = parent::getElementAttribs();
+        $attribs['multiple'] = 'multiple';
+        return $attribs;
     }
 }
