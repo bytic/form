@@ -2,7 +2,9 @@
 
 namespace Nip\Form\Tests\Renderer\Elements;
 
+use Nip\Form\Form;
 use Nip\Form\Tests\AbstractTest;
+use Nip_Form_Element_MultiElement;
 use Nip_Form_Renderer_Elements_MultiElement as MultiElementRenderer;
 
 /**
@@ -33,7 +35,7 @@ class MultiElementTest extends AbstractTest
         self::assertSame(
             '<div style="display: flex;flex-direction: row;"><div style="display: flex;flex-direction: column;flex-basis: 100%;flex: 1;padding-right: 20px;">'
             . '<label class="">:</label>'
-            . '<input  type="text" name="multi[sub-input]" class="form-control " title="" />'
+            . '<input  type="text" name="multi[sub-input]" class="form-control" title="" />'
             . '</div></div>',
             $html
         );
@@ -44,8 +46,8 @@ class MultiElementTest extends AbstractTest
      */
     protected function generateTestRenderer()
     {
-        $form = new \Nip\Form\Form();
-        $input = new \Nip_Form_Element_MultiElement($form);
+        $form = new Form();
+        $input = new Nip_Form_Element_MultiElement($form);
         $input->setName('multi');
         $input->setLabel('Multi element');
 

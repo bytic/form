@@ -2,7 +2,9 @@
 
 namespace Nip\Form\Tests\Renderer\Elements;
 
+use Nip\Form\Form;
 use Nip\Form\Tests\AbstractTest;
+use Nip_Form_Element_MultiSelect;
 use Nip_Form_Renderer_Elements_MultiSelect as Renderer;
 
 /**
@@ -16,7 +18,10 @@ class MultiSelectTest extends AbstractTest
         $renderer = $this->generateTestRenderer();
         $html = $renderer->render();
 
-        self::assertSame('<select  name="multi[]" class="form-select " title="Multi element" multiple ></select>', $html);
+        self::assertSame(
+            '<select  name="multi[]" class="form-select" title="Multi element" multiple ></select>',
+            $html
+        );
     }
 
     public function testRenderElement()
@@ -29,7 +34,7 @@ class MultiSelectTest extends AbstractTest
         $renderer->getElement()->addOption('val3', 'Opt 3');
 
         self::assertSame(
-            '<select  name="multi[]" class="form-select " title="Multi element" multiple >'
+            '<select  name="multi[]" class="form-select" title="Multi element" multiple >'
             . '<option value="val1">Opt 1</option><option value="val2">Opt 2</option><option value="val3">Opt 3</option>'
             . '</select>',
             $renderer->render()
@@ -38,7 +43,7 @@ class MultiSelectTest extends AbstractTest
         $renderer->getElement()->setValue(['val2']);
 
         self::assertSame(
-            '<select  name="multi[]" class="form-select form-select " title="Multi element" multiple >'
+            '<select  name="multi[]" class="form-select form-select" title="Multi element" multiple >'
             . '<option value="val1">Opt 1</option><option value="val2" selected="selected">Opt 2</option><option value="val3">Opt 3</option>'
             . '</select>',
             $renderer->render()
@@ -50,8 +55,8 @@ class MultiSelectTest extends AbstractTest
      */
     protected function generateTestRenderer()
     {
-        $form = new \Nip\Form\Form();
-        $input = new \Nip_Form_Element_MultiSelect($form);
+        $form = new Form();
+        $input = new Nip_Form_Element_MultiSelect($form);
         $input->setName('multi');
         $input->setLabel('Multi element');
 
