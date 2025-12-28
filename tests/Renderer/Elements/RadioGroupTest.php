@@ -2,7 +2,10 @@
 
 namespace Nip\Form\Tests\Renderer\Elements;
 
+use Nip\Form\Form;
 use Nip\Form\Tests\AbstractTest;
+use Nip_Form_Element_RadioGroup;
+use Nip_Form_Renderer_Elements_RadioGroup;
 
 /**
  * Class RadioGroupTest
@@ -28,13 +31,13 @@ class RadioGroupTest extends AbstractTest
         self::assertSame(
             '<div class="form-check">'
             . '<label class="form-check-label">'
-            . '<input  type="radio" name="" value="123" checked="checked" class="form-check-input " title="Age" />'
+            . '<input  type="radio" name="" value="123" checked="checked" class="form-check-input" title="Age" />'
             . 'Age'
             . '</label>'
             . '</div><br />'
             . '<div class="form-check">'
             . '<label class="form-check-label">'
-            . '<input  type="radio" name="" value="789" class="form-check-input " title="Height" />'
+            . '<input  type="radio" name="" value="789" class="form-check-input" title="Height" />'
             . 'Height'
             . '</label>'
             . '</div>',
@@ -53,13 +56,13 @@ class RadioGroupTest extends AbstractTest
         self::assertSame(
             '<div class="form-check">'
             . '<label class="form-check-label">'
-            . '<input  type="radio" name="" value="123" class="form-check-input " title="Age" />'
+            . '<input  type="radio" name="" value="123" class="form-check-input" title="Age" />'
             . 'Age'
             . '</label>'
             . '</div><br />'
             . '<div class="form-check">'
             . '<label class="form-check-label">'
-            . '<input  type="radio" name="" value="789" class="form-check-input " title="Height" />'
+            . '<input  type="radio" name="" value="789" class="form-check-input" title="Height" />'
             . 'Height'
             . '</label>'
             . '</div>',
@@ -69,12 +72,12 @@ class RadioGroupTest extends AbstractTest
     }
 
     /**
-     * @return \Nip_Form_Renderer_Elements_RadioGroup
+     * @return Nip_Form_Renderer_Elements_RadioGroup
      */
     protected function generateTestRenderer()
     {
-        $input = new \Nip_Form_Element_RadioGroup(new \Nip\Form\Form());
-        $render = new \Nip_Form_Renderer_Elements_RadioGroup();
+        $input = new Nip_Form_Element_RadioGroup(new Form());
+        $render = new Nip_Form_Renderer_Elements_RadioGroup();
         $render->setElement($input);
 
         return $render;

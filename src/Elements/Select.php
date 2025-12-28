@@ -96,11 +96,35 @@ class Nip_Form_Element_Select extends Nip\Form\Elements\AbstractElement
 
     public function setValue($value)
     {
+        if ($this->isMultipleSelect()) {
+            if (!is_array($value)) {
+                $value = [$value];
+            }
+            $validValues = [];
+            foreach ($value as $val) {
+                if (in_array($val, $this->_values)) {
+                    $validValues[] = $val;
+                }
+            }
+            return parent::setValue($validValues);
+        }
         if (in_array($value, $this->_values)) {
             return parent::setValue($value);
         }
 
         return false;
+    }
+
+    protected function sanitizeDataFromRequest($request)
+    {
+        if ($this->isRequestArray()) {
+            $request = is_array($request) ? $request : [$request];
+            $sanitized = array_map(function ($item) {
+                return parent::sanitizeDataFromRequest($item);
+            }, $request);
+            return $sanitized;
+        }
+        return parent::sanitizeDataFromRequest($request);
     }
 
     public function isGroup()
@@ -110,9 +134,14 @@ class Nip_Form_Element_Select extends Nip\Form\Elements\AbstractElement
 
     public function isRequestArray(): bool
     {
-        if ($this->getAttrib('multiple')) {
+        if ($this->isMultipleSelect()) {
             return true;
         }
         return parent::isRequestArray();
+    }
+
+    public function isMultipleSelect(): bool
+    {
+        return $this->getAttrib('multiple') !== null;
     }
 }

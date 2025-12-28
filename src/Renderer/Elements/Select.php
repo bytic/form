@@ -59,6 +59,9 @@ class Nip_Form_Renderer_Elements_Select extends AbstractElementRenderer
         if (is_null($selectedValue)) {
             return false;
         }
+        if (is_array($selectedValue)) {
+            return in_array($value, $selectedValue);
+        }
         if ($selectedValue === 0 or $value === 0) {
             if ($value === $selectedValue) {
                 return true;
