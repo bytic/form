@@ -29,7 +29,7 @@
   "require": {
     "php": "^8.0",
     "bytic/locale": "^1.0|^2.0",
-    "symfony/form": "^4.0|^5.0|^6.0",
+    "symfony/form": "^5.0|^6.0|^7.0",
     "ezyang/htmlpurifier": "^4.0"
   },
   "require-dev": {
