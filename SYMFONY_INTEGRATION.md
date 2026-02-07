@@ -36,15 +36,20 @@ $form->add('password', 'Password', 'password', true);
 
 ### Creating Forms (Symfony Style)
 
-You can now also use Symfony-compatible methods:
+The `add()` method now supports Symfony-style calling convention:
 
 ```php
 use Nip\Form\Form;
 
 $form = new Form();
+
+// Symfony-style: add($name, $type, $options)
 $form->add('username', 'input', ['label' => 'Username', 'required' => true]);
 $form->add('email', 'input', ['label' => 'Email', 'required' => true]);
 $form->add('password', 'password', ['label' => 'Password', 'required' => true]);
+
+// Or use default type 'input'
+$form->add('phone', null, ['label' => 'Phone Number']);
 ```
 
 ### Using the Form Builder Pattern

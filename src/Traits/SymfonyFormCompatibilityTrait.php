@@ -30,38 +30,6 @@ trait SymfonyFormCompatibilityTrait
     }
 
     /**
-     * Adds a child to the form.
-     *
-     * @param string|FormInterface $child
-     * @param string|null $type
-     * @param array $options
-     *
-     * @return $this
-     */
-    public function add($child, $type = null, array $options = [])
-    {
-        // Support both Symfony-style and legacy-style add() calls
-        if ($child instanceof AbstractElement) {
-            return $this->addElement($child);
-        }
-        
-        // If $child is a string, it's the field name
-        // This maintains backward compatibility with our existing add() method
-        // while also supporting Symfony-style calls
-        if (is_string($child)) {
-            // Check if this is a legacy-style call: add(name, label, type, required, options)
-            // or Symfony-style: add(name, type, options)
-            
-            // For now, delegate to the existing add method if it exists
-            if (method_exists($this, 'addFromParameters')) {
-                return $this->addFromParameters($child, $type, $options);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * Returns whether the form has a child with the given name.
      *
      * @param string $name

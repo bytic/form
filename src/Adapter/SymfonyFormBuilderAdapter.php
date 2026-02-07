@@ -30,15 +30,19 @@ class SymfonyFormBuilderAdapter
     /**
      * Adds a new field to this group.
      *
+     * Uses Symfony-style calling convention: add($name, $type, $options)
+     *
      * @param string $child The field name
-     * @param string|null $type The field type
+     * @param string|null $type The field type (defaults to 'input')
      * @param array $options The field options
      *
      * @return $this
      */
     public function add($child, $type = null, array $options = [])
     {
-        // Support Symfony-style form building
+        // Call the form's add method with Symfony-style parameters
+        // The form's add() method will detect this is Symfony-style
+        // because the 3rd parameter is an array
         $this->form->add($child, $type, $options);
 
         return $this;

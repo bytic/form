@@ -173,9 +173,9 @@ class SymfonyIntegrationTest extends AbstractTest
         $builder = $form->createBuilder();
 
         $builder
-            ->add('username', 'input', [])
-            ->add('email', 'input', [])
-            ->add('password', 'password', []);
+            ->add('username', 'input', ['label' => 'Username'])
+            ->add('email', 'input', ['label' => 'Email'])
+            ->add('password', 'password', ['label' => 'Password']);
 
         $resultForm = $builder->getForm();
 
