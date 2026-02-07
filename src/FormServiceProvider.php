@@ -8,11 +8,13 @@ use Symfony\Component\Form\FormRegistry;
 use Symfony\Component\Form\ResolvedFormTypeFactory;
 
 /**
- * Class FilesystemServiceProvider
- * @package Nip\Filesystem
+ * Class FormServiceProvider
+ * @package Nip\Form
  *
- * @inspiration https://github.com/laravel/framework/blob/5.4/src/Illuminate/Filesystem/FilesystemServiceProvider.php
+ * Provides Symfony Form component integration for the Nip Form library.
+ * Registers Symfony FormFactory, FormRegistry, and form extensions.
  *
+ * @inspiration https://github.com/symfony/framework-bundle/blob/master/DependencyInjection/FrameworkExtension.php
  */
 class FormServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface
 {
@@ -66,7 +68,7 @@ class FormServiceProvider extends AbstractServiceProvider implements BootableSer
     }
 
     /**
-     * Register the native filesystem implementation.
+     * Register the form extensions.
      *
      * @return void
      */
@@ -76,18 +78,20 @@ class FormServiceProvider extends AbstractServiceProvider implements BootableSer
             static::FORM_EXTENSIONS,
             function () {
                 return [
-
+                    new Extension\Legacy\LegacyExtension(),
                 ];
             }
         );
     }
 
     /**
-     * Register the native filesystem implementation.
+     * Register the Symfony Form Factory.
+     *
+     * The FormFactory is responsible for creating form instances
+     * from form types and configurations.
      *
      * @return void
      */
-    protected function registerFormFactory()
     {
         $this->getContainer()->share(
             static::FORM_FACTORY,
