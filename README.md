@@ -12,6 +12,41 @@ Form Component
 [![StyleCI](https://styleci.io/repos/114482771/shield?branch=master)](https://styleci.io/repos/114482771)
 [![Total Downloads](https://img.shields.io/packagist/dt/bytic/form.svg?style=flat-square)](https://packagist.org/packages/bytic/form)
 
+## Features
+
+- Simple, fluent API for creating forms
+- 25+ built-in form element types
+- Multiple rendering strategies (Bootstrap, Table, Paragraph)
+- **NEW: Symfony Form Component integration** - Use Symfony Form APIs while maintaining backward compatibility
+- Trait-based architecture for flexibility
+- Extensive test coverage
+
+## Symfony Form Integration
+
+This library now includes a compatibility layer with Symfony Form Component! You can use Symfony FormInterface methods alongside the existing API:
+
+```php
+use Nip\Form\Form;
+
+$form = new Form();
+
+// Use Symfony-style methods
+$form->add('username', 'input', ['label' => 'Username']);
+$form->submit($_POST);
+
+if ($form->isSubmitted() && $form->isValid()) {
+    $data = $form->getData();
+}
+```
+
+See [SYMFONY_INTEGRATION.md](SYMFONY_INTEGRATION.md) for complete documentation on Symfony integration.
+
+## Installation
+
+```bash
+composer require bytic/form
+```
+
 
 # Inspiration
 * https://github.com/symfony/form
