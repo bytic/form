@@ -74,6 +74,8 @@ trait SymfonyFormConfigTrait
     /**
      * Returns all options passed during the construction of the form.
      *
+     * Note: Uses $_options property from AbstractForm
+     *
      * @return array The passed options
      */
     public function getOptions()
@@ -83,6 +85,8 @@ trait SymfonyFormConfigTrait
 
     /**
      * Returns whether a specific option exists.
+     *
+     * Note: Uses $_options property from AbstractForm
      *
      * @param string $name The option name
      *

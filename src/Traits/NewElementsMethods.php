@@ -35,11 +35,13 @@ trait NewElementsMethods
     public function add($name, $label = false, $type = 'input', $isRequired = false, $options = [])
     {
         // Detect Symfony-style call: add(name, type, options)
-        // where $label is actually the type and $type is the options array
+        // In Symfony style, the 2nd param is type and 3rd param is options array
+        // When $type (3rd param) is an array, we know it's Symfony-style
         if (is_array($type)) {
             // Symfony-style: add($name, $type, $options)
-            $options = $type; // $type parameter is actually options
-            $elementType = is_string($label) ? $label : 'input'; // $label parameter is actually type
+            // In this case: $label param contains the type, $type param contains options
+            $options = $type; // 3rd parameter is actually options array
+            $elementType = is_string($label) ? $label : 'input'; // 2nd parameter is actually type
             $label = $options['label'] ?? ucfirst($name);
             $isRequired = $options['required'] ?? false;
         } else {
