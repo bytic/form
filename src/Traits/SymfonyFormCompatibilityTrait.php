@@ -110,21 +110,6 @@ trait SymfonyFormCompatibilityTrait
     }
 
     /**
-     * Returns the data in the format needed for the underlying object.
-     *
-     * @return mixed When the field is not submitted, the default data is returned.
-     *               When the field is submitted, the submitted data is returned.
-     */
-    public function getData()
-    {
-        if (method_exists($this, 'getFormData')) {
-            return $this->getFormData();
-        }
-
-        return $this->formData;
-    }
-
-    /**
      * Sets the data of the field.
      *
      * @param mixed $modelData
@@ -156,6 +141,9 @@ trait SymfonyFormCompatibilityTrait
 
     /**
      * Returns the normalized data of the field.
+     *
+     * Note: getData() is provided by DataProcessingTrait
+     * which collects data from form elements
      *
      * @return mixed When the field is not submitted, the default data is returned.
      *               When the field is submitted, the normalized submitted data is returned.
@@ -222,21 +210,7 @@ trait SymfonyFormCompatibilityTrait
     }
 
     /**
-     * Returns whether the form is valid.
-     *
-     * @return bool
+     * Note: isValid() is provided by HasExecutionMethodsTrait
+     * which checks if the form has any errors
      */
-    public function isValid()
-    {
-        if (!$this->isSubmitted()) {
-            return false;
-        }
-
-        // Check if there are any errors
-        if (method_exists($this, 'hasErrors')) {
-            return !$this->hasErrors();
-        }
-
-        return true;
-    }
 }
