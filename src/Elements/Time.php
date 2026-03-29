@@ -2,6 +2,9 @@
 
 class Nip_Form_Element_Time extends Nip_Form_Element_Input
 {
+
+    protected $_type = 'time';
+
     public function init()
     {
         parent::init();
