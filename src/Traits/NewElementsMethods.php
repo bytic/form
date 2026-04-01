@@ -19,17 +19,38 @@ trait NewElementsMethods
     }
 
     /**
-     * @param $name
-     * @param bool $label
-     * @param string $type
-     * @param bool $isRequired
-     * @param array $options
+     * Add a new element to the form.
+     *
+     * Supports both legacy and Symfony-style calling conventions:
+     * - Legacy: add($name, $label, $type, $isRequired, $options)
+     * - Symfony-compatible: add($name, $type, $options) where $type can be null
+     *
+     * @param string $name Element name
+     * @param bool|string $label Label text or element type (if 3rd param is array)
+     * @param string|array $type Element type or options array
+     * @param bool|array $isRequired Required flag or options array
+     * @param array $options Additional options
      * @return $this
      */
     public function add($name, $label = false, $type = 'input', $isRequired = false, $options = [])
     {
-        $label = ($label) ? $label : ucfirst($name);
-        $element = $this->getNewElement($type);
+        // Detect Symfony-style call: add(name, type, options)
+        // In Symfony style, the 2nd param is type and 3rd param is options array
+        // When $type (3rd param) is an array, we know it's Symfony-style
+        if (is_array($type)) {
+            // Symfony-style: add($name, $type, $options)
+            // In this case: $label param contains the type, $type param contains options
+            $options = $type; // 3rd parameter is actually options array
+            $elementType = is_string($label) ? $label : 'input'; // 2nd parameter is actually type
+            $label = $options['label'] ?? ucfirst($name);
+            $isRequired = $options['required'] ?? false;
+        } else {
+            // Legacy-style: add($name, $label, $type, $isRequired, $options)
+            $label = ($label) ? $label : ucfirst($name);
+            $elementType = $type;
+        }
+
+        $element = $this->getNewElement($elementType);
         $element->setName($name);
         $element->setLabel($label);
         $element->setRequired($isRequired);

@@ -25,6 +25,8 @@ abstract class AbstractForm implements FormInterface
     use Traits\MagicMethodElementsFormTrait;
     use Traits\MessagesTrait;
     use Traits\NewElementsMethods;
+    use Traits\SymfonyFormCompatibilityTrait;
+    use Traits\SymfonyFormConfigTrait;
 
     public const ENCTYPE_URLENCODED = 'application/x-www-form-urlencoded';
     public const ENCTYPE_MULTIPART = 'multipart/form-data';
@@ -129,5 +131,28 @@ abstract class AbstractForm implements FormInterface
         }
 
         return $this->controllerView;
+    }
+
+    /**
+     * Creates a Symfony-compatible form builder for this form.
+     *
+     * @return Adapter\SymfonyFormBuilderAdapter
+     */
+    public function createBuilder()
+    {
+        return new Adapter\SymfonyFormBuilderAdapter($this);
+    }
+
+    /**
+     * Creates a form view for rendering.
+     *
+     * @return $this For backward compatibility, returns the form itself
+     */
+    public function createView()
+    {
+        // In Symfony, this would create a FormView object
+        // For backward compatibility, we return the form itself
+        // as our rendering system works directly with the form
+        return $this;
     }
 }
